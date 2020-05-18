@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.fta.industry.mapper.WaterQualityMapper">
+
+    <resultMap id="WaterQualityResultMap" type="team.fta.industry.entity.WaterQuality">
+        <result column="oxygen" jdbcType="FLOAT" property="time" />
+        <result column="ph" jdbcType="FLOAT" property="frequency" />
+        <result column="turbidity" jdbcType="FLOAT" property="voltage" />
+        <result column="air" jdbcType="INTEGER" property="current" />
+
+    </resultMap>
+
+    <select id="selectAllWaterQuality" resultMap="WaterQualityResultMap">
+        select * from industry_monitor.water_quality
+    </select>
+
+
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.fta.industry.mapper.ThresholdMapper">
+
+    <resultMap id="ThresholdResultMap" type="team.fta.industry.entity.Threshold">
+        <result column="generator_frequency_high" jdbcType="INTEGER" property="generator_frequency_high" />
+        <result column="generator_frequency_low" jdbcType="INTEGER" property="generator_frequency_low" />
+        <result column="generator_voltage_high" jdbcType="INTEGER" property="generator_voltage_high" />
+        <result column="generator_voltage_low" jdbcType="INTEGER" property="generator_voltage_low" />
+        <result column="generator_current_high" jdbcType="INTEGER" property="generator_current_high" />
+        <result column="generator_current_low" jdbcType="INTEGER" property="generator_current_low" />
+        <result column="generator_load_rate_high" jdbcType="FLOAT" property="generator_load_rate_high" />
+        <result column="generator_load_rate_low" jdbcType="FLOAT" property="generator_load_rate_low" />
+        <result column="generator_power_high" jdbcType="INTEGER" property="generator_power_high" />
+        <result column="generator_power_low" jdbcType="INTEGER" property="generator_power_low" />
+        <result column="pump_flow_high" jdbcType="INTEGER" property="pump_flow_high" />
+        <result column="pump_flow_low" jdbcType="INTEGER" property="pump_flow_low" />
+        <result column="valve_flow_high" jdbcType="INTEGER" property="valve_flow_high" />
+        <result column="valve_flow_low" jdbcType="INTEGER" property="valve_flow_low" />
+        <result column="valve_pressure_high" jdbcType="INTEGER" property="valve_pressure_high" />
+        <result column="valve_pressure_low" jdbcType="INTEGER" property="valve_pressure_low" />
+        <result column="valve_level_high" jdbcType="INTEGER" property="valve_level_high" />
+        <result column="valve_level_low" jdbcType="INTEGER" property="valve_level_low" />
+        <result column="valve_frequency_high" jdbcType="INTEGER" property="valve_frequency_high" />
+        <result column="valve_frequency_low" jdbcType="INTEGER" property="valve_frequency_low" />
+
+    </resultMap>
+
+    <select id="selectAllThreshold" resultMap="ThresholdResultMap">
+        select * from industry_monitor.threshold
+    </select>
+
+
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.fta.industry.mapper.PumpMapper">
+
+    <resultMap id="PumpResultMap" type="team.fta.industry.entity.Pump">
+        <result column="flow" jdbcType="INTEGER" property="flow" />
+        <result column="valve_switch" jdbcType="INTEGER" property="valveSwitch" />
+
+    </resultMap>
+
+    <select id="selectAllPump" resultMap="PumpResultMap">
+        select * from industry_monitor.pump
+    </select>
+
+
+</mapper>

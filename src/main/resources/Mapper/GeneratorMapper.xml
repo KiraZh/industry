@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.fta.industry.mapper.GeneratorMapper">
+
+    <resultMap id="GeneratorResultMap" type="team.fta.industry.entity.Generator">
+        <result column="time" jdbcType="TIMESTAMP" property="time" />
+        <result column="frequency" jdbcType="INTEGER" property="frequency" />
+        <result column="voltage" jdbcType="INTEGER" property="voltage" />
+        <result column="current" jdbcType="INTEGER" property="current" />
+        <result column="switch" jdbcType="INTEGER" property="generatorSwitch" />
+        <result column="load_rate" jdbcType="FLOAT" property="loadRate" />
+        <result column="control" jdbcType="INTEGER" property="control" />
+        <result column="power" jdbcType="INTEGER" property="power" />
+
+    </resultMap>
+
+    <select id="selectAllGenerator" resultMap="GeneratorResultMap">
+        select * from industry_monitor.generator
+    </select>
+
+
+</mapper>
