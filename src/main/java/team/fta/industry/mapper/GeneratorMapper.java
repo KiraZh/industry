@@ -1,16 +1,18 @@
 package team.fta.industry.mapper;
 
-import team.fta.industry.entity.Generator;
-import org.springframework.stereotype.Repository;
+import java.util.Date;
+import team.fta.industry.domain.Generator;
 
-import java.util.List;
-
-@Repository
 public interface GeneratorMapper {
-    /**
-     * 查询所有发电机信息
-     * @return 发电机信息集合
-     */
-    List<Generator> selectAllGenerator();
+    int deleteByPrimaryKey(Date time);
 
+    int insert(Generator record);
+
+    int insertSelective(Generator record);
+
+    Generator selectByPrimaryKey(Date time);
+
+    int updateByPrimaryKeySelective(Generator record);
+
+    int updateByPrimaryKey(Generator record);
 }

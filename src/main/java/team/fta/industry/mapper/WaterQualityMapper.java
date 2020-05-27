@@ -1,11 +1,18 @@
 package team.fta.industry.mapper;
 
-import org.springframework.stereotype.Repository;
-import team.fta.industry.entity.WaterQuality;
+import java.util.Date;
+import team.fta.industry.domain.WaterQuality;
 
-import java.util.List;
-
-@Repository
 public interface WaterQualityMapper {
-    public List<WaterQuality> selectAllWaterQuality();
+    int deleteByPrimaryKey(Date time);
+
+    int insert(WaterQuality record);
+
+    int insertSelective(WaterQuality record);
+
+    WaterQuality selectByPrimaryKey(Date time);
+
+    int updateByPrimaryKeySelective(WaterQuality record);
+
+    int updateByPrimaryKey(WaterQuality record);
 }

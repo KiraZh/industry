@@ -1,11 +1,16 @@
-package team.fta.industry.entity;
+package team.fta.industry.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Message {
+public class Message implements Serializable {
     private String pushMsg;
+
     private Date time;
+
     private String href;
+
+    private static final long serialVersionUID = 1L;
 
     public String getPushMsg() {
         return pushMsg;
@@ -33,10 +38,14 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
-                "pushMsg='" + pushMsg + '\'' +
-                ", time=" + time +
-                ", href='" + href + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", pushMsg=").append(pushMsg);
+        sb.append(", time=").append(time);
+        sb.append(", href=").append(href);
+        sb.append("]");
+        return sb.toString();
     }
 }

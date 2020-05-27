@@ -1,17 +1,23 @@
 package team.fta.industry.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import team.fta.industry.entity.Message;
+import javax.annotation.Resource;
 import team.fta.industry.mapper.MessageMapper;
-
-import java.util.List;
-
+import team.fta.industry.domain.Message;
 @Service
-public class MessageService {
-    @Autowired
-    MessageMapper messageMapper;
-    public List<Message> selectAllMessage(){
-        return messageMapper.selectAllMessage();
+public class MessageService{
+
+    @Resource
+    private MessageMapper messageMapper;
+
+    
+    public int insert(Message record) {
+        return messageMapper.insert(record);
     }
+
+    
+    public int insertSelective(Message record) {
+        return messageMapper.insertSelective(record);
+    }
+
 }

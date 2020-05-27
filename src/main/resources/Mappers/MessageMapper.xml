@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.fta.industry.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="team.fta.industry.domain.Message">
+    <!--@mbg.generated-->
+    <!--@Table message-->
+    <result column="push_msg" jdbcType="VARCHAR" property="pushMsg" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="href" jdbcType="VARCHAR" property="href" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    push_msg, `time`, href
+  </sql>
+  <insert id="insert" parameterType="team.fta.industry.domain.Message">
+    <!--@mbg.generated-->
+    insert into message (push_msg, `time`, href
+      )
+    values (#{pushMsg,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{href,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="team.fta.industry.domain.Message">
+    <!--@mbg.generated-->
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pushMsg != null">
+        push_msg,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+      <if test="href != null">
+        href,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pushMsg != null">
+        #{pushMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="href != null">
+        #{href,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

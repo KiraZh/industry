@@ -1,12 +1,9 @@
 package team.fta.industry.mapper;
 
-import org.springframework.stereotype.Repository;
-import team.fta.industry.entity.Message;
+import team.fta.industry.domain.Message;
 
-import java.util.List;
-
-@Repository
 public interface MessageMapper {
-    public List<Message> selectAllMessage();
+    int insert(Message record);
 
+    int insertSelective(Message record);
 }

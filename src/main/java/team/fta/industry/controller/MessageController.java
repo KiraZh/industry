@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team.fta.industry.entity.Message;
-import team.fta.industry.service.MessageService;
-import com.alibaba.fastjson.JSONObject;
+import team.fta.industry.domain.Message;
+import team.fta.industry.service.TestService;
+
 import java.util.List;
 
 @RestController
@@ -15,12 +15,12 @@ import java.util.List;
 @CrossOrigin
 public class MessageController {
     @Autowired
-    private MessageService messageService;
-    @RequestMapping("/all")
-    public String selectAllMessage(){
-        List<Message> messages = messageService.selectAllMessage();
-        String jsonObject = JSON.toJSONStringWithDateFormat(messages,"yyyy-MM-dd HH:mm:ss");
-        return jsonObject;
-    }
+    private TestService messageService;
+//    @RequestMapping("/all")
+//    public String selectAllMessage(){
+//        List<Message> messages = messageService.selectAllMessage();
+//        String jsonObject = JSON.toJSONStringWithDateFormat(messages,"yyyy-MM-dd HH:mm:ss");
+//        return jsonObject;
+//    }
 
 }

@@ -1,11 +1,15 @@
-package team.fta.industry.entity;
+package team.fta.industry.domain;
 
 import java.io.Serializable;
 
 public class Account implements Serializable {
     private String id;
+
     private String password;
+
     private String email;
+
+    private static final long serialVersionUID = 1L;
 
     public String getId() {
         return id;
@@ -33,10 +37,14 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", passWord='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", password=").append(password);
+        sb.append(", email=").append(email);
+        sb.append("]");
+        return sb.toString();
     }
 }

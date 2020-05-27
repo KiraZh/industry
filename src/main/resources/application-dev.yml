@@ -12,7 +12,7 @@ spring:
     time-zone: GMT+8
 
 mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
+  mapper-locations: classpath:Mappers/*Mapper.xml
   type-aliases-package: com.example.entity
 
 #showSql

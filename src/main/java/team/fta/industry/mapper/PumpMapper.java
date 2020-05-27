@@ -1,11 +1,18 @@
 package team.fta.industry.mapper;
 
-import org.springframework.stereotype.Repository;
-import team.fta.industry.entity.Pump;
+import java.util.Date;
+import team.fta.industry.domain.Pump;
 
-import java.util.List;
-
-@Repository
 public interface PumpMapper {
-    List<Pump> selectAllPump();
+    int deleteByPrimaryKey(Date time);
+
+    int insert(Pump record);
+
+    int insertSelective(Pump record);
+
+    Pump selectByPrimaryKey(Date time);
+
+    int updateByPrimaryKeySelective(Pump record);
+
+    int updateByPrimaryKey(Pump record);
 }

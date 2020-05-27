@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.fta.industry.mapper.ThresholdMapper">
+  <resultMap id="BaseResultMap" type="team.fta.industry.domain.Threshold">
+    <!--@mbg.generated-->
+    <!--@Table threshold-->
+    <result column="generator_frequency_high" jdbcType="INTEGER" property="generatorFrequencyHigh" />
+    <result column="generator_frequency_low" jdbcType="INTEGER" property="generatorFrequencyLow" />
+    <result column="generator_voltage_high" jdbcType="INTEGER" property="generatorVoltageHigh" />
+    <result column="generator_voltage_low" jdbcType="INTEGER" property="generatorVoltageLow" />
+    <result column="generator_current_high" jdbcType="INTEGER" property="generatorCurrentHigh" />
+    <result column="generator_current_low" jdbcType="INTEGER" property="generatorCurrentLow" />
+    <result column="generator_load_rate_high" jdbcType="FLOAT" property="generatorLoadRateHigh" />
+    <result column="generator_load_rate_low" jdbcType="FLOAT" property="generatorLoadRateLow" />
+    <result column="generator_power_high" jdbcType="INTEGER" property="generatorPowerHigh" />
+    <result column="generator_power_low" jdbcType="INTEGER" property="generatorPowerLow" />
+    <result column="pump_flow_high" jdbcType="INTEGER" property="pumpFlowHigh" />
+    <result column="pump_flow_low" jdbcType="INTEGER" property="pumpFlowLow" />
+    <result column="valve_flow_high" jdbcType="INTEGER" property="valveFlowHigh" />
+    <result column="valve_flow_low" jdbcType="INTEGER" property="valveFlowLow" />
+    <result column="valve_pressure_high" jdbcType="INTEGER" property="valvePressureHigh" />
+    <result column="valve_pressure_low" jdbcType="INTEGER" property="valvePressureLow" />
+    <result column="valve_level_high" jdbcType="INTEGER" property="valveLevelHigh" />
+    <result column="valve_level_low" jdbcType="INTEGER" property="valveLevelLow" />
+    <result column="valve_frequency_high" jdbcType="INTEGER" property="valveFrequencyHigh" />
+    <result column="valve_frequency_low" jdbcType="INTEGER" property="valveFrequencyLow" />
+    <result column="waterquality_oxygen_high" jdbcType="FLOAT" property="waterqualityOxygenHigh" />
+    <result column="waterquality_oxygen_low" jdbcType="FLOAT" property="waterqualityOxygenLow" />
+    <result column="waterquailty_ph_high" jdbcType="FLOAT" property="waterquailtyPhHigh" />
+    <result column="waterquailty_ph_low" jdbcType="FLOAT" property="waterquailtyPhLow" />
+    <result column="waterquailty_turbidity_high" jdbcType="FLOAT" property="waterquailtyTurbidityHigh" />
+    <result column="waterquailty_turbidity_low" jdbcType="FLOAT" property="waterquailtyTurbidityLow" />
+    <result column="waterquailty_air_high" jdbcType="INTEGER" property="waterquailtyAirHigh" />
+    <result column="waterquailty_air_low" jdbcType="INTEGER" property="waterquailtyAirLow" />
+    <result column="waterquality_secure_high" jdbcType="INTEGER" property="waterqualitySecureHigh" />
+    <result column="waterquality_secure_low" jdbcType="INTEGER" property="waterqualitySecureLow" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    generator_frequency_high, generator_frequency_low, generator_voltage_high, generator_voltage_low, 
+    generator_current_high, generator_current_low, generator_load_rate_high, generator_load_rate_low, 
+    generator_power_high, generator_power_low, pump_flow_high, pump_flow_low, valve_flow_high, 
+    valve_flow_low, valve_pressure_high, valve_pressure_low, valve_level_high, valve_level_low, 
+    valve_frequency_high, valve_frequency_low, waterquality_oxygen_high, waterquality_oxygen_low, 
+    waterquailty_ph_high, waterquailty_ph_low, waterquailty_turbidity_high, waterquailty_turbidity_low, 
+    waterquailty_air_high, waterquailty_air_low, waterquality_secure_high, waterquality_secure_low
+  </sql>
+  <insert id="insert" parameterType="team.fta.industry.domain.Threshold">
+    <!--@mbg.generated-->
+    insert into threshold (generator_frequency_high, generator_frequency_low, 
+      generator_voltage_high, generator_voltage_low, 
+      generator_current_high, generator_current_low, 
+      generator_load_rate_high, generator_load_rate_low, 
+      generator_power_high, generator_power_low, 
+      pump_flow_high, pump_flow_low, valve_flow_high, 
+      valve_flow_low, valve_pressure_high, valve_pressure_low, 
+      valve_level_high, valve_level_low, valve_frequency_high, 
+      valve_frequency_low, waterquality_oxygen_high, 
+      waterquality_oxygen_low, waterquailty_ph_high, 
+      waterquailty_ph_low, waterquailty_turbidity_high, 
+      waterquailty_turbidity_low, waterquailty_air_high, 
+      waterquailty_air_low, waterquality_secure_high, 
+      waterquality_secure_low)
+    values (#{generatorFrequencyHigh,jdbcType=INTEGER}, #{generatorFrequencyLow,jdbcType=INTEGER}, 
+      #{generatorVoltageHigh,jdbcType=INTEGER}, #{generatorVoltageLow,jdbcType=INTEGER}, 
+      #{generatorCurrentHigh,jdbcType=INTEGER}, #{generatorCurrentLow,jdbcType=INTEGER}, 
+      #{generatorLoadRateHigh,jdbcType=FLOAT}, #{generatorLoadRateLow,jdbcType=FLOAT}, 
+      #{generatorPowerHigh,jdbcType=INTEGER}, #{generatorPowerLow,jdbcType=INTEGER}, 
+      #{pumpFlowHigh,jdbcType=INTEGER}, #{pumpFlowLow,jdbcType=INTEGER}, #{valveFlowHigh,jdbcType=INTEGER}, 
+      #{valveFlowLow,jdbcType=INTEGER}, #{valvePressureHigh,jdbcType=INTEGER}, #{valvePressureLow,jdbcType=INTEGER}, 
+      #{valveLevelHigh,jdbcType=INTEGER}, #{valveLevelLow,jdbcType=INTEGER}, #{valveFrequencyHigh,jdbcType=INTEGER}, 
+      #{valveFrequencyLow,jdbcType=INTEGER}, #{waterqualityOxygenHigh,jdbcType=FLOAT}, 
+      #{waterqualityOxygenLow,jdbcType=FLOAT}, #{waterquailtyPhHigh,jdbcType=FLOAT}, 
+      #{waterquailtyPhLow,jdbcType=FLOAT}, #{waterquailtyTurbidityHigh,jdbcType=FLOAT}, 
+      #{waterquailtyTurbidityLow,jdbcType=FLOAT}, #{waterquailtyAirHigh,jdbcType=INTEGER}, 
+      #{waterquailtyAirLow,jdbcType=INTEGER}, #{waterqualitySecureHigh,jdbcType=INTEGER}, 
+      #{waterqualitySecureLow,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="team.fta.industry.domain.Threshold">
+    <!--@mbg.generated-->
+    insert into threshold
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="generatorFrequencyHigh != null">
+        generator_frequency_high,
+      </if>
+      <if test="generatorFrequencyLow != null">
+        generator_frequency_low,
+      </if>
+      <if test="generatorVoltageHigh != null">
+        generator_voltage_high,
+      </if>
+      <if test="generatorVoltageLow != null">
+        generator_voltage_low,
+      </if>
+      <if test="generatorCurrentHigh != null">
+        generator_current_high,
+      </if>
+      <if test="generatorCurrentLow != null">
+        generator_current_low,
+      </if>
+      <if test="generatorLoadRateHigh != null">
+        generator_load_rate_high,
+      </if>
+      <if test="generatorLoadRateLow != null">
+        generator_load_rate_low,
+      </if>
+      <if test="generatorPowerHigh != null">
+        generator_power_high,
+      </if>
+      <if test="generatorPowerLow != null">
+        generator_power_low,
+      </if>
+      <if test="pumpFlowHigh != null">
+        pump_flow_high,
+      </if>
+      <if test="pumpFlowLow != null">
+        pump_flow_low,
+      </if>
+      <if test="valveFlowHigh != null">
+        valve_flow_high,
+      </if>
+      <if test="valveFlowLow != null">
+        valve_flow_low,
+      </if>
+      <if test="valvePressureHigh != null">
+        valve_pressure_high,
+      </if>
+      <if test="valvePressureLow != null">
+        valve_pressure_low,
+      </if>
+      <if test="valveLevelHigh != null">
+        valve_level_high,
+      </if>
+      <if test="valveLevelLow != null">
+        valve_level_low,
+      </if>
+      <if test="valveFrequencyHigh != null">
+        valve_frequency_high,
+      </if>
+      <if test="valveFrequencyLow != null">
+        valve_frequency_low,
+      </if>
+      <if test="waterqualityOxygenHigh != null">
+        waterquality_oxygen_high,
+      </if>
+      <if test="waterqualityOxygenLow != null">
+        waterquality_oxygen_low,
+      </if>
+      <if test="waterquailtyPhHigh != null">
+        waterquailty_ph_high,
+      </if>
+      <if test="waterquailtyPhLow != null">
+        waterquailty_ph_low,
+      </if>
+      <if test="waterquailtyTurbidityHigh != null">
+        waterquailty_turbidity_high,
+      </if>
+      <if test="waterquailtyTurbidityLow != null">
+        waterquailty_turbidity_low,
+      </if>
+      <if test="waterquailtyAirHigh != null">
+        waterquailty_air_high,
+      </if>
+      <if test="waterquailtyAirLow != null">
+        waterquailty_air_low,
+      </if>
+      <if test="waterqualitySecureHigh != null">
+        waterquality_secure_high,
+      </if>
+      <if test="waterqualitySecureLow != null">
+        waterquality_secure_low,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="generatorFrequencyHigh != null">
+        #{generatorFrequencyHigh,jdbcType=INTEGER},
+      </if>
+      <if test="generatorFrequencyLow != null">
+        #{generatorFrequencyLow,jdbcType=INTEGER},
+      </if>
+      <if test="generatorVoltageHigh != null">
+        #{generatorVoltageHigh,jdbcType=INTEGER},
+      </if>
+      <if test="generatorVoltageLow != null">
+        #{generatorVoltageLow,jdbcType=INTEGER},
+      </if>
+      <if test="generatorCurrentHigh != null">
+        #{generatorCurrentHigh,jdbcType=INTEGER},
+      </if>
+      <if test="generatorCurrentLow != null">
+        #{generatorCurrentLow,jdbcType=INTEGER},
+      </if>
+      <if test="generatorLoadRateHigh != null">
+        #{generatorLoadRateHigh,jdbcType=FLOAT},
+      </if>
+      <if test="generatorLoadRateLow != null">
+        #{generatorLoadRateLow,jdbcType=FLOAT},
+      </if>
+      <if test="generatorPowerHigh != null">
+        #{generatorPowerHigh,jdbcType=INTEGER},
+      </if>
+      <if test="generatorPowerLow != null">
+        #{generatorPowerLow,jdbcType=INTEGER},
+      </if>
+      <if test="pumpFlowHigh != null">
+        #{pumpFlowHigh,jdbcType=INTEGER},
+      </if>
+      <if test="pumpFlowLow != null">
+        #{pumpFlowLow,jdbcType=INTEGER},
+      </if>
+      <if test="valveFlowHigh != null">
+        #{valveFlowHigh,jdbcType=INTEGER},
+      </if>
+      <if test="valveFlowLow != null">
+        #{valveFlowLow,jdbcType=INTEGER},
+      </if>
+      <if test="valvePressureHigh != null">
+        #{valvePressureHigh,jdbcType=INTEGER},
+      </if>
+      <if test="valvePressureLow != null">
+        #{valvePressureLow,jdbcType=INTEGER},
+      </if>
+      <if test="valveLevelHigh != null">
+        #{valveLevelHigh,jdbcType=INTEGER},
+      </if>
+      <if test="valveLevelLow != null">
+        #{valveLevelLow,jdbcType=INTEGER},
+      </if>
+      <if test="valveFrequencyHigh != null">
+        #{valveFrequencyHigh,jdbcType=INTEGER},
+      </if>
+      <if test="valveFrequencyLow != null">
+        #{valveFrequencyLow,jdbcType=INTEGER},
+      </if>
+      <if test="waterqualityOxygenHigh != null">
+        #{waterqualityOxygenHigh,jdbcType=FLOAT},
+      </if>
+      <if test="waterqualityOxygenLow != null">
+        #{waterqualityOxygenLow,jdbcType=FLOAT},
+      </if>
+      <if test="waterquailtyPhHigh != null">
+        #{waterquailtyPhHigh,jdbcType=FLOAT},
+      </if>
+      <if test="waterquailtyPhLow != null">
+        #{waterquailtyPhLow,jdbcType=FLOAT},
+      </if>
+      <if test="waterquailtyTurbidityHigh != null">
+        #{waterquailtyTurbidityHigh,jdbcType=FLOAT},
+      </if>
+      <if test="waterquailtyTurbidityLow != null">
+        #{waterquailtyTurbidityLow,jdbcType=FLOAT},
+      </if>
+      <if test="waterquailtyAirHigh != null">
+        #{waterquailtyAirHigh,jdbcType=INTEGER},
+      </if>
+      <if test="waterquailtyAirLow != null">
+        #{waterquailtyAirLow,jdbcType=INTEGER},
+      </if>
+      <if test="waterqualitySecureHigh != null">
+        #{waterqualitySecureHigh,jdbcType=INTEGER},
+      </if>
+      <if test="waterqualitySecureLow != null">
+        #{waterqualitySecureLow,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
