@@ -1,6 +1,8 @@
 package team.fta.industry.mapper;
 
 import java.util.Date;
+import java.util.List;
+
 import team.fta.industry.domain.Valve;
 
 public interface ValveMapper {
@@ -15,4 +17,7 @@ public interface ValveMapper {
     int updateByPrimaryKeySelective(Valve record);
 
     int updateByPrimaryKey(Valve record);
+
+    List<Valve> selectRecent();
+
 }

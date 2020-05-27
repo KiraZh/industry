@@ -135,7 +135,7 @@
     where `time` = #{time,jdbcType=TIMESTAMP}
   </update>
   <select id="selectRecent" resultMap="BaseResultMap">
-  select * from generator order by generator.time desc limit 1
-</select>
+    select * from generator order by generator.time desc limit 1
+  </select>
 
 </mapper>

@@ -112,4 +112,7 @@
       secure = #{secure,jdbcType=INTEGER}
     where `time` = #{time,jdbcType=TIMESTAMP}
   </update>
+  <select id="selectRecent" resultMap="BaseResultMap">
+    select * from water_quality order by water_quality.time desc limit 1
+</select>
 </mapper>

@@ -77,4 +77,7 @@
       valve_switch = #{valveSwitch,jdbcType=BOOLEAN}
     where `time` = #{time,jdbcType=TIMESTAMP}
   </update>
+  <select id="selectRecent" resultMap="BaseResultMap">
+    select * from pump order by pump.time desc limit 1
+  </select>
 </mapper>

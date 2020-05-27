@@ -41,4 +41,7 @@ public class WaterQualityService{
         return waterQualityMapper.updateByPrimaryKey(record);
     }
 
+    public WaterQuality selectRecent(){
+        return waterQualityMapper.selectRecent();
+    }
 }

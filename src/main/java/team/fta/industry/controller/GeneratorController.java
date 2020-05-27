@@ -4,18 +4,19 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import team.fta.industry.domain.Generator;
+import team.fta.industry.domain.Pump;
 import team.fta.industry.service.GeneratorService;
 
 import javax.servlet.http.HttpSession;
 
 
 @RestController
-public class HomeController {
+public class GeneratorController {
     @Autowired
     private GeneratorService generatorService;
 
-    @GetMapping("/get_generator")
-    public JSONObject generatorInfo(){
+    @PostMapping("/get_generator")
+    public JSONObject generatorInfo(@RequestHeader("session")String session){
         Generator generator = generatorService.selectRecent();
         JSONObject jsonObject = new JSONObject(true);
         jsonObject.put("code",0);
@@ -29,5 +30,4 @@ public class HomeController {
         jsonObject.put("power",generator.getPower());
         return jsonObject;
     }
-
 }

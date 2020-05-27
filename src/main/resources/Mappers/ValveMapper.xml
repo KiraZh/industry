@@ -99,4 +99,7 @@
       frequency = #{frequency,jdbcType=INTEGER}
     where `time` = #{time,jdbcType=TIMESTAMP}
   </update>
+  <select id="selectRecent" resultMap="BaseResultMap">
+      select * from valve order by valve.time desc limit 10
+  </select>
 </mapper>

@@ -1,26 +1,30 @@
 package team.fta.industry.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team.fta.industry.domain.Message;
-import team.fta.industry.service.TestService;
+import team.fta.industry.service.MessageService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/message")
+//@RequestMapping("/message")
 @CrossOrigin
 public class MessageController {
     @Autowired
-    private TestService messageService;
-//    @RequestMapping("/all")
-//    public String selectAllMessage(){
-//        List<Message> messages = messageService.selectAllMessage();
-//        String jsonObject = JSON.toJSONStringWithDateFormat(messages,"yyyy-MM-dd HH:mm:ss");
-//        return jsonObject;
-//    }
+    private MessageService messageService;
+
+    @PostMapping("/info")
+    public JSONObject selectAllMessage(@RequestHeader("session")String session){
+        List<Message> messages = messageService.selectAll();
+        String info = JSON.toJSONStringWithDateFormat(messages,"yyyy-MM-dd HH:mm:ss");
+        JSONObject jsonObject = new JSONObject(true);
+        jsonObject.put("code",0);
+        jsonObject.put("message","success");
+        jsonObject.put("info",info);
+        return jsonObject;
+    }
 
 }

@@ -3,6 +3,8 @@ package team.fta.industry.service;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
+
 import team.fta.industry.domain.Valve;
 import team.fta.industry.mapper.ValveMapper;
 @Service
@@ -41,4 +43,7 @@ public class ValveService{
         return valveMapper.updateByPrimaryKey(record);
     }
 
+    public List<Valve> selectRecent(){
+        return valveMapper.selectRecent();
+    }
 }

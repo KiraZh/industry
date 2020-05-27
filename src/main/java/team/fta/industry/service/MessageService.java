@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import team.fta.industry.mapper.MessageMapper;
 import team.fta.industry.domain.Message;
+
+import java.util.List;
+
 @Service
 public class MessageService{
 
@@ -20,4 +23,7 @@ public class MessageService{
         return messageMapper.insertSelective(record);
     }
 
+    public List<Message> selectAll(){
+        return messageMapper.selectAll();
+    }
 }

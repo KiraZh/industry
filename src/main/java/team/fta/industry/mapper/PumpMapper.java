@@ -15,4 +15,6 @@ public interface PumpMapper {
     int updateByPrimaryKeySelective(Pump record);
 
     int updateByPrimaryKey(Pump record);
+
+    Pump selectRecent();
 }

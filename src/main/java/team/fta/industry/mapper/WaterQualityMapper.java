@@ -15,4 +15,6 @@ public interface WaterQualityMapper {
     int updateByPrimaryKeySelective(WaterQuality record);
 
     int updateByPrimaryKey(WaterQuality record);
+
+    WaterQuality selectRecent();
 }

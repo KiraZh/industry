@@ -45,4 +45,7 @@
       </if>
     </trim>
   </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from message;
+  </select>
 </mapper>

@@ -41,4 +41,7 @@ public class PumpService{
         return pumpMapper.updateByPrimaryKey(record);
     }
 
+    public Pump selectRecent(){
+        return pumpMapper.selectRecent();
+    }
 }
