@@ -35,10 +35,12 @@ public class GeneratorService{
     public int updateByPrimaryKeySelective(Generator record) {
         return generatorMapper.updateByPrimaryKeySelective(record);
     }
-
     
     public int updateByPrimaryKey(Generator record) {
         return generatorMapper.updateByPrimaryKey(record);
     }
 
+    public Generator selectRecent(){
+        return generatorMapper.selectRecent();
+    }
 }

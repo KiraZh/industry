@@ -20,4 +20,11 @@ public class AccountService{
         return accountMapper.insertSelective(record);
     }
 
+//    public Account login(String id,String password) {
+//        return accountMapper.login(id,password);
+//    }
+
+    public Account selectAccountById(String id){
+        return accountMapper.selectAccountById(id);
+    }
 }

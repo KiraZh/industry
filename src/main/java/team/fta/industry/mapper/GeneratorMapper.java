@@ -15,4 +15,6 @@ public interface GeneratorMapper {
     int updateByPrimaryKeySelective(Generator record);
 
     int updateByPrimaryKey(Generator record);
+
+    Generator selectRecent();
 }

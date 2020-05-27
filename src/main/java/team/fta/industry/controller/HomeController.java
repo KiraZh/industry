@@ -1,18 +1,33 @@
 package team.fta.industry.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
-import team.fta.industry.service.TestService;
+import org.springframework.web.bind.annotation.*;
+import team.fta.industry.domain.Generator;
+import team.fta.industry.service.GeneratorService;
+
+import javax.servlet.http.HttpSession;
 
 
 @RestController
 public class HomeController {
     @Autowired
-    private TestService testService;
+    private GeneratorService generatorService;
 
-    @GetMapping ("/home")
-    public String home (){
-        return "welcome";
+    @GetMapping("/get_generator")
+    public JSONObject generatorInfo(){
+        Generator generator = generatorService.selectRecent();
+        JSONObject jsonObject = new JSONObject(true);
+        jsonObject.put("code",0);
+        jsonObject.put("message","success");
+        jsonObject.put("frequency",generator.getFrequency());
+        jsonObject.put("voltage",generator.getVoltage());
+        jsonObject.put("current",generator.getCurrent());
+        jsonObject.put("switch",generator.getgeneratorSwitch());
+        jsonObject.put("load_rate",generator.getLoadRate());
+        jsonObject.put("control",generator.getControl());
+        jsonObject.put("power",generator.getPower());
+        return jsonObject;
     }
+
 }
