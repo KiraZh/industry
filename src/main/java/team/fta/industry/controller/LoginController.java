@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import team.fta.industry.domain.Account;
 import team.fta.industry.service.AccountService;
+import team.fta.industry.JSONObject.*;
+import team.fta.industry.utils.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,28 +16,40 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
     @Autowired
     private AccountService accountService;
+
+    public final String TOKEN = "FOLLOW_THE_ARMY";
+
     @PostMapping("/login")
-    public String login(@RequestBody Account account, HttpServletRequest request){
-        Account other = accountService.selectAccountById(account.getId());
-        JSONObject jsonObject = new JSONObject(true);
-//        request.getSession().setAttribute("username",account.getId());
-        if(other!=null) {
-            if(other.getPassword().equals(account.getPassword())) {
-                jsonObject.put("sessionKey", request.getSession().getId());
-                jsonObject.put("code", 0);
-                jsonObject.put("message", "success");
+    public String login(HttpServletRequest request){
+        String token = request.getParameter("token");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+
+        LoginReturn j = new LoginReturn();
+
+        if (!TOKEN.equals(token)){
+            j.setCode(404);
+            j.setMessage("wrong token");
+        } else {
+            Account other = accountService.selectAccountById(username);
+            if(other!=null) {
+                if(other.getPassword().equals(password)) {
+                    j.setCode(0);
+                    j.setMessage("success");
+                    j.setSessionKey(GetSessionKey.getSessionKey());
+                }
+                else {
+                    j.setCode(1);
+                    j.setMessage("Can't match username with the password");
+                }
             }
             else {
-                jsonObject.put("sessionKey", "");
-                jsonObject.put("code", 1);
-                jsonObject.put("message", "ID and password don't match");
+                j.setCode(2);
+                j.setMessage("no such user");
             }
         }
-        else {
-            jsonObject.put("sessionKey", "");
-            jsonObject.put("code", 2);
-            jsonObject.put("message", "No such user");
-        }
-        return jsonObject.toString();
+
+        return JSONObject.toJSONString(j);
     }
 }
