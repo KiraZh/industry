@@ -1,8 +1,11 @@
 package team.fta.industry.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Threshold implements Serializable {
+    private Date changeTime;
+
     private Integer generatorFrequencyHigh;
 
     private Integer generatorFrequencyLow;
@@ -64,6 +67,14 @@ public class Threshold implements Serializable {
     private Integer waterqualitySecureLow;
 
     private static final long serialVersionUID = 1L;
+
+    public Date getChangeTime() {
+        return changeTime;
+    }
+
+    public void setChangeTime(Date changeTime) {
+        this.changeTime = changeTime;
+    }
 
     public Integer getGeneratorFrequencyHigh() {
         return generatorFrequencyHigh;
@@ -311,6 +322,7 @@ public class Threshold implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
+        sb.append(", changeTime=").append(changeTime);
         sb.append(", generatorFrequencyHigh=").append(generatorFrequencyHigh);
         sb.append(", generatorFrequencyLow=").append(generatorFrequencyLow);
         sb.append(", generatorVoltageHigh=").append(generatorVoltageHigh);

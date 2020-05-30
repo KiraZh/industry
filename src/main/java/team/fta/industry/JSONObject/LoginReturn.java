@@ -17,5 +17,4 @@ public class LoginReturn {
     @JSONField(name = "sessionKey")
     private String sessionKey = "";
 
-
 }

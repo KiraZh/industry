@@ -20,4 +20,7 @@ public class ThresholdService{
         return thresholdMapper.insertSelective(record);
     }
 
+    public Threshold selectRecent(){
+        return thresholdMapper.selectRecent();
+    }
 }

@@ -5,7 +5,7 @@ spring:
   datasource:
     username: boyNextDoor
     password: DeepD4rkFantasy
-    url: jdbc:mysql://rbq.damaoooo.cf:8546/industry_monitor?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=CST
+    url: jdbc:mysql://rbq.damaoooo.cf:8546/industry_monitor?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

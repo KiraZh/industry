@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.fta.industry.mapper.SessionMapper">
+    <resultMap id="BaseResultMap" type="team.fta.industry.domain.Session">
+        <!--@mbg.generated-->
+        <!--@Table `session`-->
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="last_time" jdbcType="TIMESTAMP" property="lastTime"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="sessionKey" jdbcType="VARCHAR" property="sessionkey"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        user_name, last_time, email, sessionKey
+    </sql>
+    <insert id="insert" parameterType="team.fta.industry.domain.Session">
+        <!--@mbg.generated-->
+        insert into session(user_name, last_time, email, sessionKey)
+        values (#{userName,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR},
+                #{sessionkey,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="team.fta.industry.domain.Session">
+        <!--@mbg.generated-->
+        insert into session
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="lastTime != null">
+                last_time,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="sessionkey != null">
+                sessionKey,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastTime != null">
+                #{lastTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="sessionkey != null">
+                #{sessionkey,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectRecent" parameterType="INTEGER" resultMap="BaseResultMap">
+        select *
+        from session
+        order by last_time desc
+        limit #{n}
+    </select>
+    <update id="updateByUserName" parameterType="team.fta.industry.domain.Session">
+        update session
+        set last_time  = #{lastTime},
+            sessionKey = #{sessionkey}
+        where user_name = #{userName}
+    </update>
+    <select id="selectBySession" parameterType="String" resultMap="BaseResultMap">
+        select * from session where sessionKey = #{session}
+    </select>
+    <update id="updateBySession" parameterType="team.fta.industry.domain.Session">
+        update session
+        set last_time = #{lastTime}
+        where sessionKey = #{sessionkey}
+    </update>
+</mapper>
