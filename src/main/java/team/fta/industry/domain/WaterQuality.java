@@ -81,4 +81,15 @@ public class WaterQuality implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+
+    public double[] status(){
+        double[] status = new double[5];
+        status[0] = getOxygen();
+        status[1] = getPh();
+        status[2] = getTurbidity();
+        status[3] = getAir();
+        status[4] = getSecure();
+        return status;
+    }
+
 }

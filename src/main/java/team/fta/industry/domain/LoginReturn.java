@@ -1,4 +1,4 @@
-package team.fta.industry.JSONObject;
+package team.fta.industry.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;

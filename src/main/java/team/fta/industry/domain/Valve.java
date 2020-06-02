@@ -70,4 +70,12 @@ public class Valve implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+    public double[] status(){
+        double[] status = new double[4];
+        status[0] = getFlow();
+        status[1] = getPressure();
+        status[2] = getLevel();
+        status[3] = getFrequency();
+        return status;
+    }
 }

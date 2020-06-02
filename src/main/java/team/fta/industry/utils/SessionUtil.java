@@ -32,20 +32,4 @@ public class SessionUtil {
         }
     }
 
-//    /**
-//     * @param sessionKey 需要验证的session
-//     * @return
-//     */
-//    public static boolean verifySession(String sessionKey) {
-//        System.out.println(sessionKey);
-//        Session session = sessionService.selectBySession(sessionKey);
-//        if(session!=null){
-//            session.setLastTime(new Date());
-//            sessionService.updateBySession(session);
-//            return true;
-//        }
-//        else {
-//            return false;
-//        }
-//    }
 }

@@ -23,7 +23,7 @@ public class ValveController {
         String session = request.getParameter("sessionKey");
         JSONObject jsonObject = new JSONObject(true);
         if (sessionService.verifySession(session)) {
-            List<Valve> valves = valveService.selectRecent();
+            List<Valve> valves = valveService.selectRecents();
             int[] recent = new int[10];
             for (int i = 0; i < 10; i++) {
                 recent[i] = valves.get(i).getFlow();

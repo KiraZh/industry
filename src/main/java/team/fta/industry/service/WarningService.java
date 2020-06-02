@@ -17,7 +17,11 @@ public class WarningService{
     }
 
     
-    public int insert(Warning record) {
+    public int insert(String content,String model) {
+        Warning record = new Warning();
+        record.setTime(new Date());
+        record.setContent(content);
+        record.setModel(model);
         return warningMapper.insert(record);
     }
 

@@ -48,4 +48,9 @@ public class Pump implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+    public double[] status(){
+        double[] status = new double[1];
+        status[0] = getFlow();
+        return status;
+    }
 }

@@ -103,4 +103,15 @@ public class Generator implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+
+    public double[] status(){
+        double[] status = new double[5];
+        status[0] = getFrequency();
+        status[1] = getVoltage();
+        status[2] = getCurrent();
+        status[3] = getLoadRate();
+        status[4] = getPower();
+        return status;
+    }
+
 }

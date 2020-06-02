@@ -356,4 +356,40 @@ public class Threshold implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+
+    public double[] status() {
+        double[] status = new double[30];
+        status[0] = getGeneratorFrequencyHigh();
+        status[1] = getGeneratorFrequencyLow();
+        status[2] = getGeneratorVoltageHigh();
+        status[3] = getGeneratorVoltageLow();
+        status[4] = getGeneratorCurrentHigh();
+        status[5] = getGeneratorCurrentLow();
+        status[6] = getGeneratorLoadRateHigh();
+        status[7] = getGeneratorLoadRateLow();
+        status[8] = getGeneratorPowerHigh();
+        status[9] = getGeneratorPowerLow();
+        status[10] = getPumpFlowHigh();
+        status[11] = getPumpFlowLow();
+        status[12] = getValveFlowHigh();
+        status[13] = getValveFlowLow();
+        status[14] = getValvePressureHigh();
+        status[15] = getValvePressureLow();
+        status[16] = getValveLevelHigh();
+        status[17] = getValveLevelLow();
+        status[18] = getValveFrequencyHigh();
+        status[19] = getValveFrequencyLow();
+        status[20] = getWaterqualityOxygenHigh();
+        status[21] = getWaterqualityOxygenLow();
+        status[22] = getWaterquailtyPhHigh();
+        status[23] = getWaterquailtyPhLow();
+        status[24] = getWaterquailtyTurbidityHigh();
+        status[25] = getWaterquailtyTurbidityLow();
+        status[26] = getWaterquailtyAirHigh();
+        status[27] = getWaterquailtyAirLow();
+        status[28] = getWaterqualitySecureHigh();
+        status[29] = getWaterqualitySecureLow();
+        return status;
+    }
+
 }

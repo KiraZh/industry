@@ -18,6 +18,7 @@ public interface ValveMapper {
 
     int updateByPrimaryKey(Valve record);
 
-    List<Valve> selectRecent();
+    List<Valve> selectRecents();
 
+    Valve selectRecent();
 }
