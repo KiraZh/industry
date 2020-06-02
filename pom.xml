@@ -88,6 +88,7 @@
     </dependencies>
 
     <build>
+        <finalName>industry-0.0.1</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
