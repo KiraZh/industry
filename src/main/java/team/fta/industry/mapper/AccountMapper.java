@@ -16,4 +16,8 @@ public interface AccountMapper {
      * @return 用户数据集合
      */
     Account selectAccountById(String id);
+
+//    Account selectAccountByIdOrEmail(String string);
+
+    Account selectAccountByIdOrEmail(String id,String email);
 }

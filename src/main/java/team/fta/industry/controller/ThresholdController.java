@@ -2,6 +2,7 @@ package team.fta.industry.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.fta.industry.domain.Threshold;
@@ -13,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 
+@CrossOrigin
 @RestController
 public class ThresholdController {
     @Autowired
@@ -36,10 +38,12 @@ public class ThresholdController {
 
     public static Object setter(Object obj, String name, Object value) {
         String methodName = "set" + under2camel(name);
+        System.out.println(methodName);
         try {
             Method[] methods = obj.getClass().getMethods();
             for (Method method : methods) {
                 if (methodName.equals(method.getName())) {
+                    System.out.println("success");
                     Class<?>[] cla = method.getParameterTypes();
                     String type = cla[0].getName();
                     if (type.equals("java.lang.Integer")) {
@@ -172,17 +176,22 @@ public class ThresholdController {
         Double value = new Double(request.getParameter("value"));
         if (sessionService.verifySession(session)) {
             Threshold threshold = thresholdService.selectRecent();
+            System.out.println(threshold.toString());
+
             Object object = setter(threshold, name, value);
             Threshold record = (Threshold) object;
-            if (record == threshold) {
-                jsonObject.put("code", 1);
-                jsonObject.put("message", "wrong name");
-            } else {
-                record.setChangeTime(new Date());
-                thresholdService.insert(record);
-                jsonObject.put("code", 0);
-                jsonObject.put("message", "success");
-            }
+            System.out.println("record is " + record.toString());
+
+//            if (record == threshold) {
+//                System.out.println("xiangdeng");
+//                jsonObject.put("code", 1);
+//                jsonObject.put("message", "wrong name");
+//            } else {
+            record.setChangeTime(new Date());
+            thresholdService.insert(record);
+            jsonObject.put("code", 0);
+            jsonObject.put("message", "success");
+//            }
         } else {
             jsonObject.put("code", 404);
             jsonObject.put("message", "wrong session");

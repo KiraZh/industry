@@ -3,12 +3,13 @@ package team.fta.industry.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team.fta.industry.domain.LoginReturn;
-import team.fta.industry.domain.SignupReturn;
 import team.fta.industry.domain.Account;
+import team.fta.industry.domain.LoginReturn;
 import team.fta.industry.domain.Session;
+import team.fta.industry.domain.SignupReturn;
 import team.fta.industry.service.AccountService;
 import team.fta.industry.service.SessionService;
 import team.fta.industry.utils.SessionUtil;
@@ -16,6 +17,7 @@ import team.fta.industry.utils.SessionUtil;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
+@CrossOrigin
 @RestController
 public class AccountController {
     @Autowired
@@ -30,24 +32,36 @@ public class AccountController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-
         LoginReturn j = new LoginReturn();
+        System.out.println(username);
+        System.out.println(email);
+
+        String string;
+        if (username.equals("")) {
+            System.out.println("Id null");
+            string = email;
+        } else {
+            string = username;
+        }
 
         if (!TOKEN.equals(token)) {
             j.setCode(404);
             j.setMessage("wrong token");
         } else {
-            Account other = accountService.selectAccountById(username);
+//            Account other = accountService.selectAccountById(username);
+            Account other = accountService.selectAccountByIdOrEmail(username,email);
+            System.out.println(string);
+            System.out.println(other);
             if (other != null) {
                 if (other.getPassword().equals(password)) {
                     j.setCode(0);
                     j.setMessage("success");
                     String session = SessionUtil.getSessionKey();
                     Session record = new Session();
-                    record.setUserName(username);
+                    record.setUserName(other.getId());
                     record.setSessionkey(session);
                     record.setLastTime(new Date());
-                    record.setEmail(email);
+                    record.setEmail(other.getEmail());
                     j.setSessionKey(session);
                     try {
                         sessionService.updateByUserName(record);
@@ -78,7 +92,8 @@ public class AccountController {
         SignupReturn j = new SignupReturn();
 
         if (TOKEN.equals(token)) {
-            Account other = accountService.selectAccountById(username);
+//            Account other = accountService.selectAccountById(username);
+            Account other = accountService.selectAccountByIdOrEmail(username,email);
             if (other != null) {
                 j.setCode(1);
                 j.setMessage("User already exists");

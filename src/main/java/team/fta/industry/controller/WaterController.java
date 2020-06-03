@@ -2,6 +2,7 @@ package team.fta.industry.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.fta.industry.domain.WaterQuality;
@@ -10,6 +11,7 @@ import team.fta.industry.service.WaterQualityService;
 
 import javax.servlet.http.HttpServletRequest;
 
+@CrossOrigin
 @RestController
 public class WaterController {
     @Autowired
@@ -27,6 +29,7 @@ public class WaterController {
             jsonObject.put("message", "success");
             jsonObject.put("oxygen", waterQuality.getOxygen());
             jsonObject.put("ph", waterQuality.getPh());
+            jsonObject.put("secure",waterQuality.getSecure());
             jsonObject.put("turbidity", waterQuality.getTurbidity());
             jsonObject.put("air", waterQuality.getAir());
         } else {

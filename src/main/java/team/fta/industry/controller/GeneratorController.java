@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 
+@CrossOrigin
 @RestController
 public class GeneratorController {
     @Autowired

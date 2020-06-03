@@ -52,8 +52,13 @@
     <select id="selectAccountById" parameterType="String" resultMap="BaseResultMap">
         select * from industry_monitor.account where industry_monitor.account.id = #{id}
     </select>
-    <select id="login" parameterType="String" resultMap="BaseResultMap">
-        select * from account where id=#{param1} and password=#{param2}
+
+<!--    <select id="selectAccountByIdOrEmail" resultMap="BaseResultMap">-->
+<!--        select * from account where id = #{string} or email = #{string}-->
+<!--    </select>-->
+
+    <select id="selectAccountByIdOrEmail" resultMap="BaseResultMap">
+        select * from account where id = #{id} or email = #{email} limit 1
     </select>
 
 </mapper>

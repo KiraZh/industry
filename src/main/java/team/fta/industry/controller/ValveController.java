@@ -2,6 +2,7 @@ package team.fta.industry.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.fta.industry.domain.Valve;
@@ -11,6 +12,7 @@ import team.fta.industry.service.ValveService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class ValveController {
     @Autowired

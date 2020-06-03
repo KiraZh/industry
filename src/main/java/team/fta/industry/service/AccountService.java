@@ -25,4 +25,8 @@ public class AccountService {
     public Account selectAccountById(String id) {
         return accountMapper.selectAccountById(id);
     }
+
+    public Account selectAccountByIdOrEmail(String id,String email) {
+        return accountMapper.selectAccountByIdOrEmail(id,email);
+    }
 }
