@@ -12,9 +12,11 @@ import team.fta.industry.service.SessionService;
 import team.fta.industry.service.WarningService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 @RestController
 @CrossOrigin
@@ -24,8 +26,14 @@ public class WarningController {
     @Autowired
     SessionService sessionService;
 
-    private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//    SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
+//    fmt.setTimeZone(TimeZone.getTimeZone("UTC+8"));
+
+//    private SimpleDateFormat df = (SimpleDateFormat) DateFormat.getInstance();
+//    TimeZone time_zone = TimeZone.getTimeZone("GMT");
+    private SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 
     @PostMapping("/get_warnings")
     public JSONArray getWarnings(HttpServletRequest request) {
@@ -37,9 +45,14 @@ public class WarningController {
             jsonObject1.put("code", 0);
             jsonObject1.put("message", "success");
             jsonArray.add(jsonObject1);
+
+            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC+8"));
+            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC+8"));
+
             for (int i = 0; i < warnings.size(); i++) {
                 JSONObject jsonObject = new JSONObject(true);
                 jsonObject.put("content",warnings.get(i).getContent());
+//                ZonedDateTime date = warnings.get(i).getTime()
                 Date date = warnings.get(i).getTime();
                 jsonObject.put("time",timeFormat.format(date));
                 jsonObject.put("date",dateFormat.format(date));

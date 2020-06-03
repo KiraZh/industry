@@ -10,7 +10,7 @@ import team.fta.industry.utils.SpringMail;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//TODO 还需测试邮件收发功能
+//TODO 报警信息时间排列
 @Component
 public class WarningTimer {
     @Autowired
@@ -45,7 +45,7 @@ public class WarningTimer {
 
     private String[] models = {"generator", "pump", "valve", "water_quality"};
 
-    @Scheduled(fixedRate = 180000) //180s
+    @Scheduled(fixedRate = 1000000000) //180s
     public void checkDevices() {
         Date date = new Date();
         System.out.println("当前时间：" + dataFormat.format(date));
