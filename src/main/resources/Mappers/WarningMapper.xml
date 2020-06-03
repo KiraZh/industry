@@ -1,80 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.fta.industry.mapper.WarningMapper">
-  <resultMap id="BaseResultMap" type="team.fta.industry.domain.Warning">
-    <!--@mbg.generated-->
-    <!--@Table warning-->
-    <id column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="model" jdbcType="VARCHAR" property="model" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    `time`, content, model
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.util.Date" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from warning
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.util.Date">
-    <!--@mbg.generated-->
-    delete from warning
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </delete>
-  <insert id="insert" parameterType="team.fta.industry.domain.Warning">
-    <!--@mbg.generated-->
-    insert into warning (`time`, content, model
-      )
-    values (#{time,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="team.fta.industry.domain.Warning">
-    <!--@mbg.generated-->
-    insert into warning
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="time != null">
-        `time`,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-      <if test="model != null">
-        model,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="model != null">
-        #{model,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="team.fta.industry.domain.Warning">
-    <!--@mbg.generated-->
-    update warning
-    <set>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="model != null">
-        model = #{model,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="team.fta.industry.domain.Warning">
-    <!--@mbg.generated-->
-    update warning
-    set content = #{content,jdbcType=VARCHAR},
-      model = #{model,jdbcType=VARCHAR}
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </update>
+    <resultMap id="BaseResultMap" type="team.fta.industry.domain.Warning">
+        <!--@mbg.generated-->
+        <!--@Table warning-->
+        <id column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="model" jdbcType="VARCHAR" property="model"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        `time`, content, model
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.util.Date" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from warning
+        where `time` = #{time,jdbcType=TIMESTAMP}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.util.Date">
+        <!--@mbg.generated-->
+        delete
+        from warning
+        where `time` = #{time,jdbcType=TIMESTAMP}
+    </delete>
+    <insert id="insert" parameterType="team.fta.industry.domain.Warning">
+        <!--@mbg.generated-->
+        insert into warning (`time`, content, model)
+        values (#{time,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="team.fta.industry.domain.Warning">
+        <!--@mbg.generated-->
+        insert into warning
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="time != null">
+                `time`,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="model != null">
+                model,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="model != null">
+                #{model,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="team.fta.industry.domain.Warning">
+        <!--@mbg.generated-->
+        update warning
+        <set>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="model != null">
+                model = #{model,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where `time` = #{time,jdbcType=TIMESTAMP}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="team.fta.industry.domain.Warning">
+        <!--@mbg.generated-->
+        update warning
+        set content = #{content,jdbcType=VARCHAR},
+            model   = #{model,jdbcType=VARCHAR}
+        where `time` = #{time,jdbcType=TIMESTAMP}
+    </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select *
+        from warning;
+    </select>
 </mapper>

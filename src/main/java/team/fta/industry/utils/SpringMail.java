@@ -6,7 +6,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 public class SpringMail {
-    public void sendMail(String subject, String context, String to){
+    public static void sendMail(String subject, String context, String to){
         ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext-mail.xml");
         SimpleMailMessage mailMessage = (SimpleMailMessage) ac.getBean("mailMessage");
         mailMessage.setSubject(subject);

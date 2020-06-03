@@ -5,6 +5,8 @@ import javax.annotation.Resource;
 import team.fta.industry.domain.Warning;
 import team.fta.industry.mapper.WarningMapper;
 import java.util.Date;
+import java.util.List;
+
 @Service
 public class WarningService{
 
@@ -17,9 +19,9 @@ public class WarningService{
     }
 
     
-    public int insert(String content,String model) {
+    public int insert(Date date,String content,String model) {
         Warning record = new Warning();
-        record.setTime(new Date());
+        record.setTime(date);
         record.setContent(content);
         record.setModel(model);
         return warningMapper.insert(record);
@@ -30,19 +32,13 @@ public class WarningService{
         return warningMapper.insertSelective(record);
     }
 
-    
-    public Warning selectByPrimaryKey(Date time) {
-        return warningMapper.selectByPrimaryKey(time);
+    public List<Warning> selectAll(){
+        return warningMapper.selectAll();
     }
+    
 
     
-    public int updateByPrimaryKeySelective(Warning record) {
-        return warningMapper.updateByPrimaryKeySelective(record);
-    }
 
     
-    public int updateByPrimaryKey(Warning record) {
-        return warningMapper.updateByPrimaryKey(record);
-    }
 
 }

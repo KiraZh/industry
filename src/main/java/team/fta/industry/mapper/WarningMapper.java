@@ -1,6 +1,8 @@
 package team.fta.industry.mapper;
 
 import java.util.Date;
+import java.util.List;
+
 import team.fta.industry.domain.Warning;
 
 public interface WarningMapper {
@@ -15,4 +17,6 @@ public interface WarningMapper {
     int updateByPrimaryKeySelective(Warning record);
 
     int updateByPrimaryKey(Warning record);
+
+    List<Warning> selectAll();
 }
