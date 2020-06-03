@@ -22,7 +22,6 @@ public class ThresholdController {
     @Autowired
     private SessionService sessionService;
 
-    private JSONObject jsonObject = new JSONObject(true);
 
     private static String under2camel(String s) {
         String separator = "_";
@@ -66,27 +65,31 @@ public class ThresholdController {
     @PostMapping("/threshold_generator")
     public JSONObject generatorThInfo(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
+        JSONObject jsonObject = new JSONObject(true);
         if (sessionService.verifySession(session)) {
             Threshold threshold = thresholdService.selectRecent();
-            int[] number = new int[2];
-            double[] doubles = new double[2];
             jsonObject.put("code", 0);
             jsonObject.put("message", "success");
-            number[1] = threshold.getGeneratorFrequencyHigh();
-            number[0] = threshold.getGeneratorFrequencyLow();
-            jsonObject.put("frequency", number);
-            number[1] = threshold.getGeneratorVoltageHigh();
-            number[0] = threshold.getGeneratorVoltageLow();
-            jsonObject.put("voltage", number);
-            number[1] = threshold.getGeneratorCurrentHigh();
-            number[0] = threshold.getGeneratorCurrentLow();
-            jsonObject.put("current", number);
+            int[] gf = new int[2];
+            gf[1] = threshold.getGeneratorFrequencyHigh();
+            gf[0] = threshold.getGeneratorFrequencyLow();
+            jsonObject.put("frequency", gf);
+            int[] gv = new int[2];
+            gv[1] = threshold.getGeneratorVoltageHigh();
+            gv[0] = threshold.getGeneratorVoltageLow();
+            jsonObject.put("voltage", gv);
+            int[] gc = new int[2];
+            gc[1] = threshold.getGeneratorCurrentHigh();
+            gc[0] = threshold.getGeneratorCurrentLow();
+            jsonObject.put("current", gc);
+            double[] doubles = new double[2];
             doubles[1] = threshold.getGeneratorLoadRateHigh();
             doubles[0] = threshold.getGeneratorLoadRateLow();
             jsonObject.put("load_rate", doubles);
-            number[1] = threshold.getGeneratorPowerHigh();
-            number[0] = threshold.getGeneratorPowerLow();
-            jsonObject.put("power", doubles);
+            int[] gp = new int[2];
+            gp[1] = threshold.getGeneratorPowerHigh();
+            gp[0] = threshold.getGeneratorPowerLow();
+            jsonObject.put("power", gp);
         } else {
             jsonObject.put("code", 404);
             jsonObject.put("message", "wrong session");
@@ -96,6 +99,7 @@ public class ThresholdController {
 
     @PostMapping("/threshold_pump")
     public JSONObject pumpThInfo(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject(true);
         String session = request.getParameter("sessionKey");
         if (sessionService.verifySession(session)) {
             Threshold threshold = thresholdService.selectRecent();
@@ -114,24 +118,28 @@ public class ThresholdController {
 
     @PostMapping("/threshold_valve")
     public JSONObject valveThInfo(HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject(true);
         String session = request.getParameter("sessionKey");
         if (sessionService.verifySession(session)) {
             Threshold threshold = thresholdService.selectRecent();
-            int[] number = new int[2];
             jsonObject.put("code", 0);
             jsonObject.put("message", "success");
-            number[1] = threshold.getValveFrequencyHigh();
-            number[0] = threshold.getValveFrequencyLow();
-            jsonObject.put("frequency", number);
-            number[1] = threshold.getValveFlowHigh();
-            number[0] = threshold.getValveFlowLow();
-            jsonObject.put("flow", number);
-            number[1] = threshold.getValveLevelHigh();
-            number[0] = threshold.getValveLevelLow();
-            jsonObject.put("level", number);
-            number[1] = threshold.getValvePressureHigh();
-            number[0] = threshold.getValvePressureLow();
-            jsonObject.put("pressure", number);
+            int[] vf = new int[2];
+            vf[1] = threshold.getValveFrequencyHigh();
+            vf[0] = threshold.getValveFrequencyLow();
+            jsonObject.put("frequency", vf);
+            int[] vfl = new int[2];
+            vfl[1] = threshold.getValveFlowHigh();
+            vfl[0] = threshold.getValveFlowLow();
+            jsonObject.put("flow", vfl);
+            int[] vl = new int[2];
+            vl[1] = threshold.getValveLevelHigh();
+            vl[0] = threshold.getValveLevelLow();
+            jsonObject.put("level", vl);
+            int[] vp = new int[2];
+            vp[1] = threshold.getValvePressureHigh();
+            vp[0] = threshold.getValvePressureLow();
+            jsonObject.put("pressure", vp);
         } else {
             jsonObject.put("code", 404);
             jsonObject.put("message", "wrong session");
@@ -142,26 +150,31 @@ public class ThresholdController {
     @PostMapping("/threshold_water")
     public JSONObject waterThInfo(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
+        JSONObject jsonObject = new JSONObject(true);
         if (sessionService.verifySession(session)) {
             Threshold threshold = thresholdService.selectRecent();
-            double[] doubles = new double[2];
             jsonObject.put("code", 0);
             jsonObject.put("message", "success");
-            doubles[1] = threshold.getWaterqualityOxygenHigh();
-            doubles[0] = threshold.getWaterqualityOxygenLow();
-            jsonObject.put("oxygen", doubles);
-            doubles[1] = threshold.getWaterquailtyPhHigh();
-            doubles[0] = threshold.getWaterquailtyPhLow();
-            jsonObject.put("ph", doubles);
-            doubles[1] = threshold.getWaterquailtyAirHigh();
-            doubles[0] = threshold.getWaterquailtyAirLow();
-            jsonObject.put("air", doubles);
-            doubles[1] = threshold.getWaterquailtyTurbidityHigh();
-            doubles[0] = threshold.getWaterquailtyTurbidityLow();
-            jsonObject.put("turbidity", doubles);
-            doubles[1] = threshold.getWaterqualitySecureHigh();
-            doubles[0] = threshold.getWaterqualitySecureLow();
-            jsonObject.put("secure", doubles);
+            double[] wo = new double[2];
+            wo[1] = threshold.getWaterqualityOxygenHigh();
+            wo[0] = threshold.getWaterqualityOxygenLow();
+            jsonObject.put("oxygen", wo);
+            double[] wp = new double[2];
+            wp[1] = threshold.getWaterquailtyPhHigh();
+            wp[0] = threshold.getWaterquailtyPhLow();
+            jsonObject.put("ph", wp);
+            double[] wa = new double[2];
+            wa[1] = threshold.getWaterquailtyAirHigh();
+            wa[0] = threshold.getWaterquailtyAirLow();
+            jsonObject.put("air", wa);
+            double[] wt = new double[2];
+            wt[1] = threshold.getWaterquailtyTurbidityHigh();
+            wt[0] = threshold.getWaterquailtyTurbidityLow();
+            jsonObject.put("turbidity", wt);
+            double[] ws = new double[2];
+            ws[1] = threshold.getWaterqualitySecureHigh();
+            ws[0] = threshold.getWaterqualitySecureLow();
+            jsonObject.put("secure", ws);
         } else {
             jsonObject.put("code", 404);
             jsonObject.put("message", "wrong session");
@@ -174,6 +187,7 @@ public class ThresholdController {
         String session = request.getParameter("sessionKey");
         String name = request.getParameter("name");
         Double value = new Double(request.getParameter("value"));
+        JSONObject jsonObject = new JSONObject(true);
         if (sessionService.verifySession(session)) {
             Threshold threshold = thresholdService.selectRecent();
             System.out.println(threshold.toString());
