@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.fta.industry.mapper.GeneratorMapper">
+  <resultMap id="BaseResultMap" type="team.fta.industry.domain.Generator">
+    <!--@mbg.generated-->
+    <!--@Table generator-->
+    <id column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+    <result column="voltage" jdbcType="INTEGER" property="voltage" />
+    <result column="current" jdbcType="INTEGER" property="current" />
+    <result column="switch" jdbcType="BOOLEAN" property="generatorSwitch" />
+    <result column="load_rate" jdbcType="FLOAT" property="loadRate" />
+    <result column="control" jdbcType="INTEGER" property="control" />
+    <result column="power" jdbcType="INTEGER" property="power" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    `time`, frequency, voltage, `current`, switch, load_rate, control, `power`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.util.Date" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from generator
+    where `time` = #{time,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.util.Date">
+    <!--@mbg.generated-->
+    delete from generator
+    where `time` = #{time,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="team.fta.industry.domain.Generator">
+    <!--@mbg.generated-->
+    insert into generator (`time`, frequency, voltage, 
+      `current`, switch, load_rate, 
+      control, `power`)
+    values (#{time,jdbcType=TIMESTAMP}, #{frequency,jdbcType=INTEGER}, #{voltage,jdbcType=INTEGER}, 
+      #{current,jdbcType=INTEGER}, #{generatorSwitch,jdbcType=BOOLEAN}, #{loadRate,jdbcType=FLOAT},
+      #{control,jdbcType=INTEGER}, #{power,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="team.fta.industry.domain.Generator">
+    <!--@mbg.generated-->
+    insert into generator
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="time != null">
+        `time`,
+      </if>
+      <if test="frequency != null">
+        frequency,
+      </if>
+      <if test="voltage != null">
+        voltage,
+      </if>
+      <if test="current != null">
+        `current`,
+      </if>
+      <if test="generatorSwitch != null">
+        switch,
+      </if>
+      <if test="loadRate != null">
+        load_rate,
+      </if>
+      <if test="control != null">
+        control,
+      </if>
+      <if test="power != null">
+        `power`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="frequency != null">
+        #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="voltage != null">
+        #{voltage,jdbcType=INTEGER},
+      </if>
+      <if test="current != null">
+        #{current,jdbcType=INTEGER},
+      </if>
+      <if test="generatorSwitch != null">
+        #{generatorSwitch,jdbcType=BOOLEAN},
+      </if>
+      <if test="loadRate != null">
+        #{loadRate,jdbcType=FLOAT},
+      </if>
+      <if test="control != null">
+        #{control,jdbcType=INTEGER},
+      </if>
+      <if test="power != null">
+        #{power,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.fta.industry.domain.Generator">
+    <!--@mbg.generated-->
+    update generator
+    <set>
+      <if test="frequency != null">
+        frequency = #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="voltage != null">
+        voltage = #{voltage,jdbcType=INTEGER},
+      </if>
+      <if test="current != null">
+        `current` = #{current,jdbcType=INTEGER},
+      </if>
+      <if test="generatorSwitch != null">
+        switch = #{generatorSwitch,jdbcType=BOOLEAN},
+      </if>
+      <if test="loadRate != null">
+        load_rate = #{loadRate,jdbcType=FLOAT},
+      </if>
+      <if test="control != null">
+        control = #{control,jdbcType=INTEGER},
+      </if>
+      <if test="power != null">
+        `power` = #{power,jdbcType=INTEGER},
+      </if>
+    </set>
+    where `time` = #{time,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.fta.industry.domain.Generator">
+    <!--@mbg.generated-->
+    update generator
+    set frequency = #{frequency,jdbcType=INTEGER},
+      voltage = #{voltage,jdbcType=INTEGER},
+      `current` = #{current,jdbcType=INTEGER},
+      switch = #{generatorSwitch,jdbcType=BOOLEAN},
+      load_rate = #{loadRate,jdbcType=FLOAT},
+      control = #{control,jdbcType=INTEGER},
+      `power` = #{power,jdbcType=INTEGER}
+    where `time` = #{time,jdbcType=TIMESTAMP}
+  </update>
+  <select id="selectRecent" resultMap="BaseResultMap">
+    select * from generator order by generator.time desc limit 1
+  </select>
+
+</mapper>
