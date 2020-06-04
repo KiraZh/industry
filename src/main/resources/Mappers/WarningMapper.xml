@@ -12,72 +12,22 @@
         <!--@mbg.generated-->
         `time`, content, model
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.util.Date" resultMap="BaseResultMap">
-        <!--@mbg.generated-->
-        select
-        <include refid="Base_Column_List"/>
-        from warning
-        where `time` = #{time,jdbcType=TIMESTAMP}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.util.Date">
-        <!--@mbg.generated-->
-        delete
-        from warning
-        where `time` = #{time,jdbcType=TIMESTAMP}
-    </delete>
+
     <insert id="insert" parameterType="team.fta.industry.domain.Warning">
         <!--@mbg.generated-->
         insert into warning (`time`, content, model)
         values (#{time,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="team.fta.industry.domain.Warning">
-        <!--@mbg.generated-->
-        insert into warning
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="time != null">
-                `time`,
-            </if>
-            <if test="content != null">
-                content,
-            </if>
-            <if test="model != null">
-                model,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="time != null">
-                #{time,jdbcType=TIMESTAMP},
-            </if>
-            <if test="content != null">
-                #{content,jdbcType=VARCHAR},
-            </if>
-            <if test="model != null">
-                #{model,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="team.fta.industry.domain.Warning">
-        <!--@mbg.generated-->
-        update warning
-        <set>
-            <if test="content != null">
-                content = #{content,jdbcType=VARCHAR},
-            </if>
-            <if test="model != null">
-                model = #{model,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where `time` = #{time,jdbcType=TIMESTAMP}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="team.fta.industry.domain.Warning">
-        <!--@mbg.generated-->
-        update warning
-        set content = #{content,jdbcType=VARCHAR},
-            model   = #{model,jdbcType=VARCHAR}
-        where `time` = #{time,jdbcType=TIMESTAMP}
-    </update>
-    <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectRecent" resultMap="BaseResultMap">
         select *
-        from warning;
+        from warning
+        where time >= current_timestamp - INTERVAL 120 MINUTE
+        order by time desc;
+    </select>
+    <select id="selectByDate" resultMap="BaseResultMap">
+        select *
+        from warning
+        where to_days(time) = to_days(#{date})
+        order by time desc;
     </select>
 </mapper>

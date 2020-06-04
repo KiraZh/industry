@@ -1,80 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.fta.industry.mapper.WarningDayaverageMapper">
-  <resultMap id="BaseResultMap" type="team.fta.industry.domain.WarningDayaverage">
-    <!--@mbg.generated-->
-    <!--@Table warning_dayaverage-->
-    <id column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="model" jdbcType="VARCHAR" property="model" />
-    <result column="warning_times" jdbcType="INTEGER" property="warningTimes" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    `time`, model, warning_times
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.util.Date" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from warning_dayaverage
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.util.Date">
-    <!--@mbg.generated-->
-    delete from warning_dayaverage
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </delete>
-  <insert id="insert" parameterType="team.fta.industry.domain.WarningDayaverage">
-    <!--@mbg.generated-->
-    insert into warning_dayaverage (`time`, model, warning_times
-      )
-    values (#{time,jdbcType=TIMESTAMP}, #{model,jdbcType=VARCHAR}, #{warningTimes,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="team.fta.industry.domain.WarningDayaverage">
-    <!--@mbg.generated-->
-    insert into warning_dayaverage
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="time != null">
-        `time`,
-      </if>
-      <if test="model != null">
-        model,
-      </if>
-      <if test="warningTimes != null">
-        warning_times,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="model != null">
-        #{model,jdbcType=VARCHAR},
-      </if>
-      <if test="warningTimes != null">
-        #{warningTimes,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="team.fta.industry.domain.WarningDayaverage">
-    <!--@mbg.generated-->
-    update warning_dayaverage
-    <set>
-      <if test="model != null">
-        model = #{model,jdbcType=VARCHAR},
-      </if>
-      <if test="warningTimes != null">
-        warning_times = #{warningTimes,jdbcType=INTEGER},
-      </if>
-    </set>
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="team.fta.industry.domain.WarningDayaverage">
-    <!--@mbg.generated-->
-    update warning_dayaverage
-    set model = #{model,jdbcType=VARCHAR},
-      warning_times = #{warningTimes,jdbcType=INTEGER}
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </update>
+    <resultMap id="BaseResultMap" type="team.fta.industry.domain.WarningDayaverage">
+        <!--@mbg.generated-->
+        <!--@Table warning_dayaverage-->
+        <id column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="model" jdbcType="VARCHAR" property="model"/>
+        <result column="warning_times" jdbcType="INTEGER" property="warningTimes"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        `time`, model, warning_times
+    </sql>
+
+    <select id="select7Days" resultMap="BaseResultMap">
+        select *
+        from warning_dayaverage
+        order by time desc, model asc
+        limit 28;
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select *
+        from warning_dayaverage
+        order by time desc, model asc;
+    </select>
 </mapper>

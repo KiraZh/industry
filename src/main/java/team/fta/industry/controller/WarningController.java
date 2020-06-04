@@ -12,7 +12,7 @@ import team.fta.industry.service.SessionService;
 import team.fta.industry.service.WarningService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -26,45 +26,88 @@ public class WarningController {
     @Autowired
     SessionService sessionService;
 
-//    SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
-//    fmt.setTimeZone(TimeZone.getTimeZone("UTC+8"));
-
-//    private SimpleDateFormat df = (SimpleDateFormat) DateFormat.getInstance();
-//    TimeZone time_zone = TimeZone.getTimeZone("GMT");
-    private SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-
     @PostMapping("/get_warnings")
     public JSONArray getWarnings(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
-        JSONObject jsonObject1 = new JSONObject(true);
         JSONArray jsonArray = new JSONArray();
-        if(sessionService.verifySession(session)) {
-            List<Warning> warnings = warningService.selectAll();
+        if (sessionService.verifySession(session)) {
+            List<Warning> warnings = warningService.selectRecent();
+
+            JSONObject jsonObject1 = new JSONObject(true);
             jsonObject1.put("code", 0);
             jsonObject1.put("message", "success");
             jsonArray.add(jsonObject1);
 
-            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC+8"));
-            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC+8"));
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+            dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
 
             for (int i = 0; i < warnings.size(); i++) {
                 JSONObject jsonObject = new JSONObject(true);
-                jsonObject.put("content",warnings.get(i).getContent());
-//                ZonedDateTime date = warnings.get(i).getTime()
+                jsonObject.put("content", warnings.get(i).getContent());
                 Date date = warnings.get(i).getTime();
-                jsonObject.put("time",timeFormat.format(date));
-                jsonObject.put("date",dateFormat.format(date));
+                System.out.println(timeFormat.format(new Date()).toString());
+                System.out.println(timeFormat.format(date).toString());
+                jsonObject.put("time", timeFormat.format(date));
+                jsonObject.put("date", dateFormat.format(date));
                 jsonArray.add(jsonObject);
                 System.out.println(jsonArray);
-
             }
         } else {
+            JSONObject jsonObject1 = new JSONObject(true);
             jsonObject1.put("code", 404);
             jsonObject1.put("message", "wrong session");
             jsonArray.add(jsonObject1);
         }
         return jsonArray;
     }
+
+    @PostMapping("/get_history_warnings")
+    public JSONObject getHistoryWarnings(HttpServletRequest request) throws ParseException {
+        String session = request.getParameter("sessionKey");
+        String dateString = request.getParameter("date");
+        JSONObject jsonObject = new JSONObject(true);
+        if (sessionService.verifySession(session)) {
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+//                System.out.println(timeFormat.getTimeZone().toString());
+                Date date = dateFormat.parse(dateString);
+                List<Warning> warnings = warningService.selectByDate(date);
+                jsonObject.put("code", 0);
+                jsonObject.put("message", "success");
+                JSONArray jsonArray = new JSONArray();
+                for (int i = 0; i < warnings.size(); i++) {
+                    JSONObject temp = new JSONObject(true);
+                    temp.put("content", warnings.get(i).getContent());
+                    temp.put("date", dateFormat.format(warnings.get(i).getTime()));
+                    temp.put("time", timeFormat.format(warnings.get(i).getTime()));
+                    jsonArray.add(temp);
+                }
+                jsonObject.put("info", jsonArray);
+
+            } catch (Exception e) {
+                JSONObject jsonObject1 = new JSONObject(true);
+                jsonObject1.put("code", 1);
+                jsonObject1.put("message", e.toString());
+            }
+        } else {
+            jsonObject.put("code", 404);
+            jsonObject.put("message", "wrong session");
+        }
+        return jsonObject;
+    }
+
+//    public static void main(String[] args) throws ParseException {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+////        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+//        System.out.println(sdf.getTimeZone().toString());
+//        String dateS = "2020-06-04";
+//        Date date = sdf.parse(dateS);
+//        System.out.println(sdf.format(date));
+//        System.out.println(date.toString());
+//    }
 }

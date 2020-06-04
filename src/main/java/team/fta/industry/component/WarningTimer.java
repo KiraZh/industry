@@ -10,8 +10,7 @@ import team.fta.industry.utils.SpringMail;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//TODO 报警信息时间排列
-@Component
+//@Component
 public class WarningTimer {
     @Autowired
     GeneratorService generatorService;
@@ -77,7 +76,7 @@ public class WarningTimer {
         if (report.equals(copy)) {
             report = report + "各设备参数正常\n";
         }
-        SpringMail.sendMail("工业预警系统报警记录", report, email);
+//        SpringMail.sendMail("工业预警系统报警记录", report, email);
         System.out.println(report);
 
     }

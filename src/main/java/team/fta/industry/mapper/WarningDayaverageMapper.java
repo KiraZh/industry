@@ -1,18 +1,12 @@
 package team.fta.industry.mapper;
 
-import java.util.Date;
 import team.fta.industry.domain.WarningDayaverage;
 
+import java.util.List;
+
 public interface WarningDayaverageMapper {
-    int deleteByPrimaryKey(Date time);
+    List<WarningDayaverage> select7Days();
 
-    int insert(WarningDayaverage record);
+    List<WarningDayaverage> selectAll();
 
-    int insertSelective(WarningDayaverage record);
-
-    WarningDayaverage selectByPrimaryKey(Date time);
-
-    int updateByPrimaryKeySelective(WarningDayaverage record);
-
-    int updateByPrimaryKey(WarningDayaverage record);
 }

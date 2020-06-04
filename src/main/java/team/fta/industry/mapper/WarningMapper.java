@@ -1,22 +1,15 @@
 package team.fta.industry.mapper;
 
+import team.fta.industry.domain.Warning;
+
 import java.util.Date;
 import java.util.List;
 
-import team.fta.industry.domain.Warning;
-
 public interface WarningMapper {
-    int deleteByPrimaryKey(Date time);
 
     int insert(Warning record);
 
-    int insertSelective(Warning record);
+    List<Warning> selectRecent();
 
-    Warning selectByPrimaryKey(Date time);
-
-    int updateByPrimaryKeySelective(Warning record);
-
-    int updateByPrimaryKey(Warning record);
-
-    List<Warning> selectAll();
+    List<Warning> selectByDate(Date date);
 }
