@@ -68,7 +68,6 @@ public class AccountController {
                     } catch (Exception e) {
                         System.out.println("error");
                     }
-                    ;
                 } else {
                     j.setCode(1);
                     j.setMessage("Can't match username with the password");

@@ -10,7 +10,7 @@ import team.fta.industry.utils.SpringMail;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//@Component
+@Component
 public class WarningTimer {
     @Autowired
     GeneratorService generatorService;
@@ -25,7 +25,7 @@ public class WarningTimer {
     @Autowired
     WarningService warningService;
 
-    private static String email = "damaoooo@163.com";
+    private static String email = "gyglwyh@126.com";   //TODO
     private static final SimpleDateFormat dataFormat = new SimpleDateFormat("HH:mm:ss");
     private String[] parameters = {"generator frequency", "generator voltage",
             "generator current", "generator load rate",
@@ -44,7 +44,7 @@ public class WarningTimer {
 
     private String[] models = {"generator", "pump", "valve", "water_quality"};
 
-    @Scheduled(fixedRate = 1000000000) //180s
+    @Scheduled(fixedDelay = 30*60*1000) //半小时   30*60*1000
     public void checkDevices() {
         Date date = new Date();
         System.out.println("当前时间：" + dataFormat.format(date));
@@ -76,7 +76,7 @@ public class WarningTimer {
         if (report.equals(copy)) {
             report = report + "各设备参数正常\n";
         }
-//        SpringMail.sendMail("工业预警系统报警记录", report, email);
+        SpringMail.sendMail("工业预警系统报警记录", report, email);
         System.out.println(report);
 
     }
@@ -105,6 +105,4 @@ public class WarningTimer {
         }
         return arr;
     }
-
-
 }
