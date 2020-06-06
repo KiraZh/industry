@@ -9,6 +9,7 @@ import team.fta.industry.utils.SpringMail;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Component
 public class WarningTimer {
@@ -47,6 +48,7 @@ public class WarningTimer {
     @Scheduled(fixedDelay = 30*60*1000) //半小时   30*60*1000
     public void checkDevices() {
         Date date = new Date();
+        dataFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         System.out.println("当前时间：" + dataFormat.format(date));
         String report = "这是" + dataFormat.format(date) + "的检测报告：\n";
         String copy = report;
