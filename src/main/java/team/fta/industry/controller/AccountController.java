@@ -20,12 +20,18 @@ import java.util.Date;
 @CrossOrigin
 @RestController
 public class AccountController {
+    public final String TOKEN = "FOLLOW_THE_ARMY";
     @Autowired
     private AccountService accountService;
     @Autowired
     private SessionService sessionService;
-    public final String TOKEN = "FOLLOW_THE_ARMY";
 
+    /**
+     * 用户登陆API
+     *
+     * @param request http请求（token，用户名，密码，邮件）
+     * @return json（提示信息，session）
+     */
     @PostMapping("/login")
     public String login(HttpServletRequest request) {
         String token = request.getParameter("token");
@@ -48,8 +54,7 @@ public class AccountController {
             j.setCode(404);
             j.setMessage("wrong token");
         } else {
-//            Account other = accountService.selectAccountById(username);
-            Account other = accountService.selectAccountByIdOrEmail(username,email);
+            Account other = accountService.selectAccountByIdOrEmail(username, email);
             System.out.println(string);
             System.out.println(other);
             if (other != null) {
@@ -81,6 +86,12 @@ public class AccountController {
         return JSONObject.toJSONString(j);
     }
 
+    /**
+     * 用户注册API
+     *
+     * @param request http请求（token，用户名，密码，邮件）
+     * @return json（提示信息，session）
+     */
     @PostMapping("/sign_up")
     public String signUp(HttpServletRequest request) {
         String token = request.getParameter("token");
@@ -91,8 +102,7 @@ public class AccountController {
         SignupReturn j = new SignupReturn();
 
         if (TOKEN.equals(token)) {
-//            Account other = accountService.selectAccountById(username);
-            Account other = accountService.selectAccountByIdOrEmail(username,email);
+            Account other = accountService.selectAccountByIdOrEmail(username, email);
             if (other != null) {
                 j.setCode(1);
                 j.setMessage("User already exists");
@@ -117,6 +127,12 @@ public class AccountController {
         return JSON.toJSONString(j);
     }
 
+    /**
+     * 释放session API
+     *
+     * @param request http请求（token，session）
+     * @return json（提示信息）
+     */
     @PostMapping("/release")
     public String release(HttpServletRequest request) {
         String sessionKey = request.getParameter("sessionKey");

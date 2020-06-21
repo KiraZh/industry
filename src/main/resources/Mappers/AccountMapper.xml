@@ -1,64 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.fta.industry.mapper.AccountMapper">
-  <resultMap id="BaseResultMap" type="team.fta.industry.domain.Account">
-    <!--@mbg.generated-->
-    <!--@Table account-->
-    <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, `password`, email
-  </sql>
-  <insert id="insert" parameterType="team.fta.industry.domain.Account">
-    <!--@mbg.generated-->
-    insert into account (id, `password`, email
-      )
-    values (#{id,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="team.fta.industry.domain.Account">
-    <!--@mbg.generated-->
-    insert into account
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="password != null">
-        `password`,
-      </if>
-      <if test="email != null">
-        email,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-      <select id="findAll" resultMap="BaseResultMap">
-        select * from industry_monitor.account
+    <resultMap id="BaseResultMap" type="team.fta.industry.domain.Account">
+        <!--@mbg.generated-->
+        <!--@Table account-->
+        <result column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, `password`, email
+    </sql>
+    <insert id="insert" parameterType="team.fta.industry.domain.Account">
+        <!--@mbg.generated-->
+        insert into account (id, `password`, email
+        )
+        values (#{id,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="team.fta.industry.domain.Account">
+        <!--@mbg.generated-->
+        insert into account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="findAll" resultMap="BaseResultMap">
+        select *
+        from industry_monitor.account
     </select>
 
     <select id="selectAccountById" parameterType="String" resultMap="BaseResultMap">
-        select * from industry_monitor.account where industry_monitor.account.id = #{id}
+        select *
+        from industry_monitor.account
+        where industry_monitor.account.id = #{id}
     </select>
-
-<!--    <select id="selectAccountByIdOrEmail" resultMap="BaseResultMap">-->
-<!--        select * from account where id = #{string} or email = #{string}-->
-<!--    </select>-->
 
     <select id="selectAccountByIdOrEmail" resultMap="BaseResultMap">
-        select * from account where id = #{id} or email = #{email} limit 1
+        select *
+        from account
+        where id = #{id}
+           or email = #{email}
+        limit 1
     </select>
-
 </mapper>

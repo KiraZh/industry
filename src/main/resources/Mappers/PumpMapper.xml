@@ -1,83 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.fta.industry.mapper.PumpMapper">
-  <resultMap id="BaseResultMap" type="team.fta.industry.domain.Pump">
-    <!--@mbg.generated-->
-    <!--@Table pump-->
-    <id column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="flow" jdbcType="INTEGER" property="flow" />
-    <result column="valve_switch" jdbcType="BOOLEAN" property="valveSwitch" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    `time`, flow, valve_switch
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.util.Date" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from pump
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.util.Date">
-    <!--@mbg.generated-->
-    delete from pump
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </delete>
-  <insert id="insert" parameterType="team.fta.industry.domain.Pump">
-    <!--@mbg.generated-->
-    insert into pump (`time`, flow, valve_switch
-      )
-    values (#{time,jdbcType=TIMESTAMP}, #{flow,jdbcType=INTEGER}, #{valveSwitch,jdbcType=BOOLEAN}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="team.fta.industry.domain.Pump">
-    <!--@mbg.generated-->
-    insert into pump
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="time != null">
-        `time`,
-      </if>
-      <if test="flow != null">
-        flow,
-      </if>
-      <if test="valveSwitch != null">
-        valve_switch,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="flow != null">
-        #{flow,jdbcType=INTEGER},
-      </if>
-      <if test="valveSwitch != null">
-        #{valveSwitch,jdbcType=BOOLEAN},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="team.fta.industry.domain.Pump">
-    <!--@mbg.generated-->
-    update pump
-    <set>
-      <if test="flow != null">
-        flow = #{flow,jdbcType=INTEGER},
-      </if>
-      <if test="valveSwitch != null">
-        valve_switch = #{valveSwitch,jdbcType=BOOLEAN},
-      </if>
-    </set>
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="team.fta.industry.domain.Pump">
-    <!--@mbg.generated-->
-    update pump
-    set flow = #{flow,jdbcType=INTEGER},
-      valve_switch = #{valveSwitch,jdbcType=BOOLEAN}
-    where `time` = #{time,jdbcType=TIMESTAMP}
-  </update>
-  <select id="selectRecent" resultMap="BaseResultMap">
-    select * from pump order by pump.time desc limit 1
-  </select>
+    <resultMap id="BaseResultMap" type="team.fta.industry.domain.Pump">
+        <!--@mbg.generated-->
+        <!--@Table pump-->
+        <id column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="flow" jdbcType="INTEGER" property="flow"/>
+        <result column="valve_switch" jdbcType="BOOLEAN" property="valveSwitch"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        `time`, flow, valve_switch
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.util.Date" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from pump
+        where `time` = #{time,jdbcType=TIMESTAMP}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.util.Date">
+        <!--@mbg.generated-->
+        delete from pump
+        where `time` = #{time,jdbcType=TIMESTAMP}
+    </delete>
+    <insert id="insert" parameterType="team.fta.industry.domain.Pump">
+        <!--@mbg.generated-->
+        insert into pump (`time`, flow, valve_switch
+        )
+        values (#{time,jdbcType=TIMESTAMP}, #{flow,jdbcType=INTEGER}, #{valveSwitch,jdbcType=BOOLEAN}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="team.fta.industry.domain.Pump">
+        <!--@mbg.generated-->
+        insert into pump
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="time != null">
+                `time`,
+            </if>
+            <if test="flow != null">
+                flow,
+            </if>
+            <if test="valveSwitch != null">
+                valve_switch,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="flow != null">
+                #{flow,jdbcType=INTEGER},
+            </if>
+            <if test="valveSwitch != null">
+                #{valveSwitch,jdbcType=BOOLEAN},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="team.fta.industry.domain.Pump">
+        <!--@mbg.generated-->
+        update pump
+        <set>
+            <if test="flow != null">
+                flow = #{flow,jdbcType=INTEGER},
+            </if>
+            <if test="valveSwitch != null">
+                valve_switch = #{valveSwitch,jdbcType=BOOLEAN},
+            </if>
+        </set>
+        where `time` = #{time,jdbcType=TIMESTAMP}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="team.fta.industry.domain.Pump">
+        <!--@mbg.generated-->
+        update pump
+        set flow = #{flow,jdbcType=INTEGER},
+        valve_switch = #{valveSwitch,jdbcType=BOOLEAN}
+        where `time` = #{time,jdbcType=TIMESTAMP}
+    </update>
+    <select id="selectRecent" resultMap="BaseResultMap">
+        select *
+        from pump
+        order by pump.time desc
+        limit 1
+    </select>
 </mapper>

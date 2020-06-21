@@ -21,10 +21,10 @@ public class AnalysisController {
     private SessionService sessionService;
 
     /**
-     * 返回7天的设备报警记录
+     * 高级分析主界面，返回7天的设备报警记录
      *
-     * @param request
-     * @return json
+     * @param request http请求（session）
+     * @return json（提示信息，高级分析数据）
      */
     @PostMapping("/advanced_analyze")
     public JSONObject getAdvanceAnalysis(HttpServletRequest request) {
@@ -57,6 +57,12 @@ public class AnalysisController {
         return jsonObject;
     }
 
+    /**
+     * 高级分析二级界面，返回所有设备报警记录
+     *
+     * @param request http请求（session）
+     * @return json（提示信息，高级分析数据）
+     */
     @PostMapping("/advanced_analyze_more")
     public JSONObject getMoreAdvanceAnalysis(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");

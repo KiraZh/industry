@@ -30,9 +30,9 @@
     <insert id="insert" parameterType="team.fta.industry.domain.Valve">
         <!--@mbg.generated-->
         insert into valve (`time`, flow, pressure,
-                           `level`, frequency)
+        `level`, frequency)
         values (#{time,jdbcType=TIMESTAMP}, #{flow,jdbcType=INTEGER}, #{pressure,jdbcType=INTEGER},
-                #{level,jdbcType=INTEGER}, #{frequency,jdbcType=INTEGER})
+        #{level,jdbcType=INTEGER}, #{frequency,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="team.fta.industry.domain.Valve">
         <!--@mbg.generated-->
@@ -94,10 +94,10 @@
     <update id="updateByPrimaryKey" parameterType="team.fta.industry.domain.Valve">
         <!--@mbg.generated-->
         update valve
-        set flow      = #{flow,jdbcType=INTEGER},
-            pressure  = #{pressure,jdbcType=INTEGER},
-            `level`   = #{level,jdbcType=INTEGER},
-            frequency = #{frequency,jdbcType=INTEGER}
+        set flow = #{flow,jdbcType=INTEGER},
+        pressure = #{pressure,jdbcType=INTEGER},
+        `level` = #{level,jdbcType=INTEGER},
+        frequency = #{frequency,jdbcType=INTEGER}
         where `time` = #{time,jdbcType=TIMESTAMP}
     </update>
     <select id="selectRecents" resultMap="BaseResultMap">

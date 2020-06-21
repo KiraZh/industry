@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/message")
 @CrossOrigin
 public class MessageController {
     @Autowired
@@ -22,6 +21,12 @@ public class MessageController {
     @Autowired
     private SessionService sessionService;
 
+    /**
+     * 消息推送，返回消息列表
+     *
+     * @param request http请求（session）
+     * @return json（提示信息，推送消息）
+     */
     @PostMapping("/info")
     public JSONObject selectAllMessage(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");

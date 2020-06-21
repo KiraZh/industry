@@ -10,14 +10,8 @@ public interface AccountMapper {
     int insertSelective(Account record);
 
     List<Account> findAll();
-    /**
-     * 根据用户ID查询用户数据
-     * @param id 用户ID
-     * @return 用户数据集合
-     */
-    Account selectAccountById(String id);
 
-//    Account selectAccountByIdOrEmail(String string);
+    Account selectAccountById(String id);
 
     Account selectAccountByIdOrEmail(String id,String email);
 }

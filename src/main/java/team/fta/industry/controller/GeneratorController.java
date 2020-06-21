@@ -2,15 +2,14 @@ package team.fta.industry.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import team.fta.industry.domain.Generator;
-import team.fta.industry.domain.Pump;
 import team.fta.industry.service.GeneratorService;
 import team.fta.industry.service.SessionService;
-import team.fta.industry.utils.SessionUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 
@@ -19,10 +18,14 @@ import java.util.Date;
 public class GeneratorController {
     @Autowired
     private GeneratorService generatorService;
-
     @Autowired
     private SessionService sessionService;
 
+    /**
+     * 获取发电机当前的状态
+     * @param request http请求（session）
+     * @return json（提示信息，发电机的各项参数）
+     */
     @PostMapping("/get_generator")
     public JSONObject generatorInfo(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
@@ -45,6 +48,11 @@ public class GeneratorController {
         return jsonObject;
     }
 
+    /**
+     * 设置发电机开关
+     * @param request http请求（session，开关状态）
+     * @return json（提示信息）
+     */
     @PostMapping("/gen_switch")
     public JSONObject setGeneratorSwitch(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
@@ -53,11 +61,9 @@ public class GeneratorController {
         Boolean genSwitch;
         if (s == 0) {
             genSwitch = false;
-        }
-        else if (s == 1) {
+        } else if (s == 1) {
             genSwitch = true;
-        }
-        else {
+        } else {
             jsonObject.put("code", 1);
             jsonObject.put("message", "error");
             return jsonObject;

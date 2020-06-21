@@ -17,30 +17,35 @@ public class SessionService {
     public int insert(Session record) throws DataAccessException {
         return sessionMapper.insert(record);
     }
-    public int insertSelective(Session record){
+
+    public int insertSelective(Session record) {
         return sessionMapper.insertSelective(record);
     }
-    public List<Session> selectRecent(int n){
+
+    public List<Session> selectRecent(int n) {
         return sessionMapper.selectRecent(n);
     }
-    public int updateByUserName(Session record){
+
+    public int updateByUserName(Session record) {
         return sessionMapper.updateByUserName(record);
     }
-    public Session selectBySession(String session){
+
+    public Session selectBySession(String session) {
         return sessionMapper.selectBySession(session);
     }
-    public int updateBySession(Session record){
+
+    public int updateBySession(Session record) {
         return sessionMapper.updateBySession(record);
     }
+
     public boolean verifySession(String sessionKey) {
         System.out.println(sessionKey);
         Session session = selectBySession(sessionKey);
-        if(session!=null){
+        if (session != null) {
             session.setLastTime(new Date());
             updateBySession(session);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

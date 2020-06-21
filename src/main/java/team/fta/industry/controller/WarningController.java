@@ -26,6 +26,11 @@ public class WarningController {
     @Autowired
     SessionService sessionService;
 
+    /**
+     * 获取最近两小时的报警信息
+     * @param request http请求（session）
+     * @return json（提示信息，报警内容，时间）
+     */
     @PostMapping("/get_warnings")
     public JSONArray getWarnings(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
@@ -63,8 +68,13 @@ public class WarningController {
         return jsonArray;
     }
 
+    /**
+     * 获取指定日期的历史报警信息
+     * @param request http请求（session，日期）
+     * @return json（提示信息，报警信息）
+     */
     @PostMapping("/get_history_warnings")
-    public JSONObject getHistoryWarnings(HttpServletRequest request) throws ParseException {
+    public JSONObject getHistoryWarnings(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
         String dateString = request.getParameter("date");
         JSONObject jsonObject = new JSONObject(true);
@@ -74,7 +84,6 @@ public class WarningController {
                 dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
                 SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
                 timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-//                System.out.println(timeFormat.getTimeZone().toString());
                 Date date = dateFormat.parse(dateString);
                 List<Warning> warnings = warningService.selectByDate(date);
                 jsonObject.put("code", 0);
@@ -101,13 +110,4 @@ public class WarningController {
         return jsonObject;
     }
 
-//    public static void main(String[] args) throws ParseException {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-////        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-//        System.out.println(sdf.getTimeZone().toString());
-//        String dateS = "2020-06-04";
-//        Date date = sdf.parse(dateS);
-//        System.out.println(sdf.format(date));
-//        System.out.println(date.toString());
-//    }
 }

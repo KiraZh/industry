@@ -6,7 +6,14 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 public class SpringMail {
-    public static void sendMail(String subject, String context, String to){
+    /**
+     * 发送邮件
+     *
+     * @param subject 邮件主题
+     * @param context 邮件内容
+     * @param to      收件方
+     */
+    public static void sendMail(String subject, String context, String to) {
         ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext-mail.xml");
         SimpleMailMessage mailMessage = (SimpleMailMessage) ac.getBean("mailMessage");
         mailMessage.setSubject(subject);
@@ -15,5 +22,5 @@ public class SpringMail {
         JavaMailSenderImpl mailSender = (JavaMailSenderImpl) ac.getBean("mailSender");
         mailSender.send(mailMessage);
     }
-    
+
 }

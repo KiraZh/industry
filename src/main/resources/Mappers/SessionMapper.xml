@@ -17,7 +17,7 @@
         <!--@mbg.generated-->
         insert into session(user_name, last_time, email, sessionKey)
         values (#{userName,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR},
-                #{sessionkey,jdbcType=VARCHAR})
+        #{sessionkey,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="team.fta.industry.domain.Session">
         <!--@mbg.generated-->
@@ -64,7 +64,9 @@
         where user_name = #{userName}
     </update>
     <select id="selectBySession" parameterType="String" resultMap="BaseResultMap">
-        select * from session where sessionKey = #{session}
+        select *
+        from session
+        where sessionKey = #{session}
     </select>
     <update id="updateBySession" parameterType="team.fta.industry.domain.Session">
         update session

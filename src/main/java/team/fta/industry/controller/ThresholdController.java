@@ -10,7 +10,6 @@ import team.fta.industry.service.SessionService;
 import team.fta.industry.service.ThresholdService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 
@@ -22,12 +21,17 @@ public class ThresholdController {
     @Autowired
     private SessionService sessionService;
 
-
+    /**
+     * 将下划线命名转为驼峰命名
+     *
+     * @param s 需要转换的字符串
+     * @return 转换后的字符串
+     */
     private static String under2camel(String s) {
         String separator = "_";
         String under = "";
         s = s.toLowerCase().replace(separator, " ");
-        String sarr[] = s.split(" ");
+        String[] sarr = s.split(" ");
         for (int i = 0; i < sarr.length; i++) {
             String w = sarr[i].substring(0, 1).toUpperCase() + sarr[i].substring(1);
             under += w;
@@ -35,33 +39,44 @@ public class ThresholdController {
         return under;
     }
 
+    /**
+     * 根据变量名称获取并调用对应的set方法
+     *
+     * @param obj   对象
+     * @param name  变量名
+     * @param value 设置的值
+     * @return 原对象
+     */
     public static Object setter(Object obj, String name, Object value) {
-        String methodName = "set" + under2camel(name);
+        String methodName = "set" + under2camel(name);  //set方法名
         System.out.println(methodName);
         try {
-            Method[] methods = obj.getClass().getMethods();
+            Method[] methods = obj.getClass().getMethods(); //获取对象的所有方法
             for (Method method : methods) {
                 if (methodName.equals(method.getName())) {
-                    System.out.println("success");
-                    Class<?>[] cla = method.getParameterTypes();
+                    Class<?>[] cla = method.getParameterTypes();   //获取参数类型
                     String type = cla[0].getName();
-                    if (type.equals("java.lang.Integer")) {
+                    if (type.equals("java.lang.Integer")) {     //将double转换为int
                         double d = new Double(value.toString());
                         int i = new Double(d).intValue();
-                        method.invoke(obj, i);
+                        method.invoke(obj, i);  //调用方法
                     } else {
                         method.invoke(obj, new Double(value.toString()));
                     }
                 }
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return obj;
     }
 
+    /**
+     * 获取发电机阈值的参数
+     *
+     * @param request http请求（session）
+     * @return json（提示信息，发电机阈值参数）
+     */
     @PostMapping("/threshold_generator")
     public JSONObject generatorThInfo(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
@@ -97,6 +112,12 @@ public class ThresholdController {
         return jsonObject;
     }
 
+    /**
+     * 获取水泵阈值的参数
+     *
+     * @param request http请求（session）
+     * @return json（提示信息，水泵阈值参数）
+     */
     @PostMapping("/threshold_pump")
     public JSONObject pumpThInfo(HttpServletRequest request) {
         JSONObject jsonObject = new JSONObject(true);
@@ -116,6 +137,12 @@ public class ThresholdController {
         return jsonObject;
     }
 
+    /**
+     * 获取阀门阈值的参数
+     *
+     * @param request http请求（session）
+     * @return json（提示信息，阀门阈值参数）
+     */
     @PostMapping("/threshold_valve")
     public JSONObject valveThInfo(HttpServletRequest request) {
         JSONObject jsonObject = new JSONObject(true);
@@ -147,6 +174,12 @@ public class ThresholdController {
         return jsonObject;
     }
 
+    /**
+     * 获取水质阈值的参数
+     *
+     * @param request http请求（session）
+     * @return json（提示信息，水质阈值参数）
+     */
     @PostMapping("/threshold_water")
     public JSONObject waterThInfo(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
@@ -182,6 +215,12 @@ public class ThresholdController {
         return jsonObject;
     }
 
+    /**
+     * 设置阈值
+     *
+     * @param request http请求（session，参数名，阈值）
+     * @return json（提示信息）
+     */
     @PostMapping("/set_threshold")
     public JSONObject setTh(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
@@ -190,22 +229,16 @@ public class ThresholdController {
         JSONObject jsonObject = new JSONObject(true);
         if (sessionService.verifySession(session)) {
             Threshold threshold = thresholdService.selectRecent();
-            System.out.println(threshold.toString());
+//            System.out.println(threshold.toString());
 
             Object object = setter(threshold, name, value);
             Threshold record = (Threshold) object;
-            System.out.println("record is " + record.toString());
+//            System.out.println("record is " + record.toString());
 
-//            if (record == threshold) {
-//                System.out.println("xiangdeng");
-//                jsonObject.put("code", 1);
-//                jsonObject.put("message", "wrong name");
-//            } else {
             record.setChangeTime(new Date());
             thresholdService.insert(record);
             jsonObject.put("code", 0);
             jsonObject.put("message", "success");
-//            }
         } else {
             jsonObject.put("code", 404);
             jsonObject.put("message", "wrong session");

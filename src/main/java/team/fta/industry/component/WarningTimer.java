@@ -13,6 +13,16 @@ import java.util.TimeZone;
 
 @Component
 public class WarningTimer {
+    private static final SimpleDateFormat dataFormat = new SimpleDateFormat("HH:mm:ss");
+    private static final String email = "gyglwyh@126.com";
+    private final String[] models = {"generator", "pump", "valve", "water_quality"};
+    private final String[] parametersCN = {"发动机的频率", "发动机的电压",
+            "发电机的电流", "发电机的负载率",
+            "发电机的功率", "潜水泵的流量",
+            "供水阀门的流量", "供水阀门的水压",
+            "供水阀门的水位", "供水阀门的电机转动速度",
+            "水质的余氧", "水质的酸碱度",
+            "水质的浊度", "水质的空气质量", "水质的安防在线"};
     @Autowired
     GeneratorService generatorService;
     @Autowired
@@ -26,30 +36,13 @@ public class WarningTimer {
     @Autowired
     WarningService warningService;
 
-    private static String email = "gyglwyh@126.com";   //TODO
-    private static final SimpleDateFormat dataFormat = new SimpleDateFormat("HH:mm:ss");
-    private String[] parameters = {"generator frequency", "generator voltage",
-            "generator current", "generator load rate",
-            "generator power", "pump flow",
-            "valve flow", "valve pressure",
-            "valve level", "valve frequency",
-            "water quality oxygen", "water quality ph",
-            "water quality turbidity", "water quality air", "water quality secure"};
-    private String[] parametersCN = {"发动机的频率", "发动机的电压",
-            "发电机的电流", "发电机的负载率",
-            "发电机的功率", "潜水泵的流量",
-            "供水阀门的流量", "供水阀门的水压",
-            "供水阀门的水位", "供水阀门的电机转动速度",
-            "水质的余氧", "水质的酸碱度",
-            "水质的浊度", "水质的空气质量", "水质的安防在线"};
-
-    private String[] models = {"generator", "pump", "valve", "water_quality"};
-
-    @Scheduled(fixedDelay = 30*60*1000) //半小时   30*60*1000
+    /**
+     * 定时检查设备（每半小时），将设备参数与阈值进行对比，生成并发送报警邮件
+     */
+    @Scheduled(fixedDelay = 30 * 60 * 1000) //半小时   30*60*1000
     public void checkDevices() {
         Date date = new Date();
         dataFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-        System.out.println("当前时间：" + dataFormat.format(date));
         String report = "这是" + dataFormat.format(date) + "的检测报告：\n";
         String copy = report;
 
@@ -60,7 +53,7 @@ public class WarningTimer {
         Threshold threshold = thresholdService.selectRecent();
 
         double[] th = threshold.status();   //high,low
-        double[] data = arrayJoin(generator.status(), pump.status());
+        double[] data = arrayJoin(generator.status(), pump.status());   //生成数据数组
         data = arrayJoin(data, valve.status());
         data = arrayJoin(data, water.status());
 
@@ -83,6 +76,12 @@ public class WarningTimer {
 
     }
 
+    /**
+     * 将参数的序号转化为设备的名称
+     *
+     * @param i 参数数组的序号
+     * @return 返回设备的名称
+     */
     public String paraToModel(int i) {
         String s = "";
         if (i >= 0 && i < 5) {
@@ -97,6 +96,13 @@ public class WarningTimer {
         return s;
     }
 
+    /**
+     * 将两个数组进行拼接
+     *
+     * @param a 需要拼接的数组a
+     * @param b 需要拼接的数组b
+     * @return 返回数组a和b拼接而成的数组
+     */
     public double[] arrayJoin(double[] a, double[] b) {
         double[] arr = new double[a.length + b.length];
         for (int i = 0; i < a.length; i++) {

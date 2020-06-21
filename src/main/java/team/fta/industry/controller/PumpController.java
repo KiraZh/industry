@@ -20,6 +20,12 @@ public class PumpController {
     @Autowired
     private SessionService sessionService;
 
+    /**
+     * 获取获取水泵当前的状态
+     *
+     * @param request http请求（session）
+     * @return json（提示信息，水泵的各项参数）
+     */
     @PostMapping("/get_pump")
     public JSONObject getPumpInfo(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
@@ -36,6 +42,13 @@ public class PumpController {
         }
         return jsonObject;
     }
+
+    /**
+     * 设置水泵的流量
+     *
+     * @param request http请求（session，流量）
+     * @return json（提示信息）
+     */
     @PostMapping("/pump_flow")
     public JSONObject setPumpFlow(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
@@ -57,6 +70,12 @@ public class PumpController {
         return jsonObject;
     }
 
+    /**
+     * 设置水泵开关
+     *
+     * @param request http请求（session，开关状态）
+     * @return json（提示信息）
+     */
     @PostMapping("/pump_switch")
     public JSONObject setPumpSwitch(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
@@ -65,11 +84,9 @@ public class PumpController {
         Boolean genSwitch;
         if (s == 0) {
             genSwitch = false;
-        }
-        else if (s == 1) {
+        } else if (s == 1) {
             genSwitch = true;
-        }
-        else {
+        } else {
             jsonObject.put("code", 1);
             jsonObject.put("message", "error");
             return jsonObject;

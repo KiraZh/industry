@@ -19,6 +19,12 @@ public class WaterController {
     @Autowired
     private SessionService sessionService;
 
+    /**
+     * 获取获取水质当前的状态
+     *
+     * @param request http请求（session）
+     * @return json（提示信息，水质的各项参数）
+     */
     @PostMapping("/get_water_quality")
     public JSONObject waterQuality(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");

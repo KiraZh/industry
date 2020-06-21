@@ -20,6 +20,12 @@ public class ValveController {
     @Autowired
     private SessionService sessionService;
 
+    /**
+     * 获取获取阀门当前的状态
+     *
+     * @param request http请求（session）
+     * @return json（提示信息，阀门的各项参数）
+     */
     @PostMapping("/get_valve")
     public JSONObject valveInfo(HttpServletRequest request) {
         String session = request.getParameter("sessionKey");
